@@ -1,8 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════
-   SHOP.JS — Product Filtering & Pagination
+/* SHOP.JS — Product Filtering & Pagination
    Handles the shop page product grid filtering by collection
-   and category, plus pagination for browsing products.
-   ═══════════════════════════════════════════════════════════════ */
+   and category, plus pagination for browsing products. */
 
 
 /**
@@ -86,11 +84,9 @@ function render() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   FILTER BUTTON EVENT LISTENERS
+/* FILTER BUTTON EVENT LISTENERS
    Each filter button updates the active filter, resets to page 1,
-   and re-renders the grid.
-   ═══════════════════════════════════════════════════════════════ */
+   and re-renders the grid. */
 
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -112,11 +108,9 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 
-/* ═══════════════════════════════════════════════════════════════
-   PAGINATION EVENT LISTENERS
+/* PAGINATION EVENT LISTENERS
    Page number buttons, previous, and next controls.
-   Scrolls to top of grid after page change.
-   ═══════════════════════════════════════════════════════════════ */
+   Scrolls to top of grid after page change. */
 
 /* Page number buttons (1, 2, 3) */
 document.querySelectorAll('.page-btn').forEach(b => {
@@ -147,9 +141,7 @@ document.getElementById('next-btn').addEventListener('click', () => {
 });
 
 
-/* ═══════════════════════════════════════════════════════════════
-   INITIAL RENDER
-   Show the default view (all products, page 1) on page load.
-   ═══════════════════════════════════════════════════════════════ */
+/* INITIAL RENDER
+   Show the default view (all products, page 1) on page load. */
 
 render();

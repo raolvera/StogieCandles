@@ -1,8 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════
-   THEME.JS — Light/Dark Mode Toggle
+/* THEME.JS — Light/Dark Mode Toggle
    Handles theme switching, icon visibility, localStorage
-   persistence, and footer logo recoloring via canvas.
-   ═══════════════════════════════════════════════════════════════ */
+   persistence, and footer logo recoloring via canvas. */
 
 
 /**
@@ -88,11 +86,9 @@ function recolorFooterLogos() {
 }
 
 
-/* ═══════════════════════════════════════════════════════════════
-   INITIALIZATION
+/* INITIALIZATION
    On page load, check localStorage for saved theme preference
-   and apply it. Also recolor footer logos to match.
-   ═══════════════════════════════════════════════════════════════ */
+   and apply it. Also recolor footer logos to match. */
 
 /* Apply saved theme from localStorage (defaults to light if not set) */
 setTheme(localStorage.getItem('theme') === 'dark');
@@ -101,12 +97,10 @@ setTheme(localStorage.getItem('theme') === 'dark');
 recolorFooterLogos();
 
 
-/* ═══════════════════════════════════════════════════════════════
-   THEME TOGGLE EVENT LISTENERS
+/* THEME TOGGLE EVENT LISTENERS
    Two toggle buttons: one for mobile menu, one for desktop.
    Both do the same thing — toggle dark class, swap icons,
-   save preference, and recolor the footer logo.
-   ═══════════════════════════════════════════════════════════════ */
+   save preference, and recolor the footer logo. */
 
 ['theme-toggle', 'theme-toggle-lg'].forEach(id => {
     const btn = document.getElementById(id);
