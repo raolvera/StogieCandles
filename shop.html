@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stogie Candles | Shop Bold Scents</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg sticky-top" id="main-nav">
+    <div class="container-fluid px-4">
+        <a href="index.html" class="nav-brand navbar-brand"><img src="img/SCdark.png" alt="SC" class="nav-logo nav-logo-light nav-sc"><img src="img/SClight.png" alt="SC" class="nav-logo nav-logo-dark nav-sc"><img src="img/LogoDark.png" alt="Stogie Candles" class="nav-logo nav-logo-light"><img src="img/LogoLight.png" alt="Stogie Candles" class="nav-logo nav-logo-dark"></a>
+        <div class="d-flex align-items-center gap-3 d-lg-none ms-auto">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="shop.html" class="nav-link active">Shop</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                <li class="nav-item"><a href="shop.html" class="btn-nav">Shop Now</a></li>
+                <li class="nav-item d-lg-none mt-2">
+                    <button id="theme-toggle" aria-label="Toggle theme" class="d-flex align-items-center gap-2 nav-link px-0">
+                        <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                        <svg id="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    </button>
+                </li>
+            </ul>
+            <button id="theme-toggle-lg" aria-label="Toggle theme" class="d-none d-lg-flex ms-4">
+                <svg id="icon-sun-lg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg id="icon-moon-lg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Page Hero -->
+<section class="hero" style="height:40vh; min-height:280px;">
+    <div class="hero-img-placeholder"></div>
+    <div class="hero-content">
+        <h1>The Collection</h1>
+        <p>Don't let the flame burn out, Keep your stogie lit!</p>
+    </div>
+</section>
+
+<!-- Bundle Banner -->
+<div class="ad-banner">
+    Bundle &amp; Save &nbsp;&middot;&nbsp; Mix Any 3 Candles for $70 &nbsp;&middot;&nbsp; Save $15
+</div>
+
+<!-- Shop Section -->
+<section>
+    <div class="container-xl">
+        <div class="filter-bar">
+            <button class="filter-btn active">All</button>
+            <button class="filter-btn">The Family</button>
+            <button class="filter-btn">The Lounge</button>
+            <button class="filter-btn">The Cedar Room</button>
+            <button class="filter-btn">The Morning Roast</button>
+            <button class="filter-btn">The Aged Reserve</button>
+            <button class="filter-btn">Bestsellers</button>
+            <button class="filter-btn">New Arrivals</button>
+            <button class="filter-btn">Gift Sets</button>
+        </div>
+
+        <div id="label-all" style="margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">The Bold &amp; The Lit</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">All Stogies &mdash; Every Scent, Every Line</h3>
+        </div>
+        <div id="label-family" style="display:none; margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">Signature Line</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">The Family &mdash; Mafia Collection</h3>
+        </div>
+        <div id="label-lounge" style="display:none; margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">Signature Line</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">The Lounge &mdash; Lounge Collection</h3>
+        </div>
+        <div id="label-cedar" style="display:none; margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">Aged &amp; Smoked</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">The Cedar Room &mdash; Raw Wood &amp; Open Fire</h3>
+        </div>
+        <div id="label-roast" style="display:none; margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">Dark &amp; Roasted</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">The Morning Roast &mdash; Coffee, Tobacco &amp; Grit</h3>
+        </div>
+        <div id="label-reserve" style="display:none; margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">Barrel Aged</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">The Aged Reserve &mdash; Bourbon, Oak &amp; Smoke</h3>
+        </div>
+        <div id="label-bestseller" style="display:none; margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">The Ones They Keep Coming Back For</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">Bestsellers &mdash; The Heavy Hitters</h3>
+        </div>
+        <div id="label-new" style="display:none; margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">Just Dropped</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">New Arrivals &mdash; Fresh Drops</h3>
+        </div>
+        <div id="label-gift" style="display:none; margin-bottom:24px;">
+            <p class="section-label" style="margin-bottom:4px;">Gift Collection</p>
+            <h3 style="font-family:'Cinzel',serif; font-size:1.1rem; letter-spacing:3px; color:var(--text); margin-bottom:0;">Gift Sets &mdash; The Perfect Gift</h3>
+        </div>
+
+        <div id="product-grid" class="products-grid">
+            <!-- PAGE 1: mixed Family + Lounge -->
+            <div class="product-item" data-category="bestseller" data-line="family" data-page="1">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Chairman</p>
+                        <p class="product-desc">Bold tobacco, dark leather, and smoked cedar. A commanding presence.</p>
+                        <p class="product-price">$25.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="product-item" data-category="bestseller" data-line="lounge" data-page="1">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">Havana Nights</p>
+                        <p class="product-desc">Rich tobacco, cedar, and a hint of vanilla. Keep your stogie lit.</p>
+                        <p class="product-price">$28.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <div class="product-item" data-category="bestseller" data-line="family" data-page="1">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Godfather</p>
+                        <p class="product-desc">An offer you can't refuse. Aged tobacco, sandalwood, and dark amber.</p>
+                        <p class="product-price">$35.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="product-item" data-category="bestseller" data-line="lounge" data-page="1">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">Bourbon &amp; Oak</p>
+                        <p class="product-desc">Warm bourbon, smoked oak, and leather. A glass worth savouring.</p>
+                        <p class="product-price">$32.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <div class="product-item" data-category="new" data-line="family" data-page="1">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Don</p>
+                        <p class="product-desc">Powerful and unforgettable. Rich mahogany, black pepper, and vetiver.</p>
+                        <p class="product-price">$30.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="product-item" data-category="new" data-line="lounge" data-page="1">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">Dark Roast</p>
+                        <p class="product-desc">Rich espresso, toasted tobacco, and a hint of dark chocolate.</p>
+                        <p class="product-price">$27.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <div class="product-item" data-category="new" data-line="family" data-page="1">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Capo</p>
+                        <p class="product-desc">Rich and complex. Cognac, clove, and aged leather for those in charge.</p>
+                        <p class="product-price">$28.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="product-item" data-category="bestseller" data-line="lounge" data-page="1">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">Leather &amp; Cedar</p>
+                        <p class="product-desc">Classic lounge atmosphere — aged leather, dark cedar, and musk.</p>
+                        <p class="product-price">$30.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- PAGE 2: mixed Family + Lounge -->
+            <!-- <div class="product-item" data-category="new" data-line="family" data-page="2">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Consigliere</p>
+                        <p class="product-desc">Smooth and subtle. Bergamot, white cedar, and soft musk.</p>
+                        <p class="product-price">$28.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="lounge" data-page="2">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">Tobacco &amp; Honey</p>
+                        <p class="product-desc">Sweet golden honey layered over aged tobacco and warm cedar.</p>
+                        <p class="product-price">$29.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="family" data-page="2">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Underboss</p>
+                        <p class="product-desc">Loyal and dependable. Rum, mahogany, and smoldering embers.</p>
+                        <p class="product-price">$26.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="bestseller" data-line="lounge" data-page="2">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">Lounge Reserve</p>
+                        <p class="product-desc">Deep mahogany, aged tobacco, sandalwood. The full lounge experience.</p>
+                        <p class="product-price">$36.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="bestseller" data-line="family" data-page="2">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Executive</p>
+                        <p class="product-desc">Refined and sophisticated. Bourbon, oak, and a whisper of vanilla.</p>
+                        <p class="product-price">$25.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="lounge" data-page="2">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">Midnight Smoke</p>
+                        <p class="product-desc">Dark amber, black pepper, vetiver, and a slow cedar burn.</p>
+                        <p class="product-price">$28.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="family" data-page="2">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Soldier</p>
+                        <p class="product-desc">Tough and resilient. Black walnut, dark earth, and a touch of smoke.</p>
+                        <p class="product-price">$22.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="lounge" data-page="2">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">Cold Brew &amp; Leather</p>
+                        <p class="product-desc">Bold cold brew coffee, dark leather, and a whisper of smoked oak.</p>
+                        <p class="product-price">$29.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- PAGE 3: The Cedar Room, The Morning Roast, The Aged Reserve + gift sets -->
+            <!-- <div class="product-item" data-category="new" data-line="cedar" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Cedar Room</p>
+                        <p class="product-desc">Raw cedarwood, birch and pine smoke — the raw heart of the lounge.</p>
+                        <p class="product-price">$27.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="cedar" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Sawmill</p>
+                        <p class="product-desc">Fresh cut oak, black walnut and a whisper of pine resin.</p>
+                        <p class="product-price">$26.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="bestseller" data-line="cedar" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Smokehouse</p>
+                        <p class="product-desc">Smoked hickory, dark cedar and charred birch bark — bold and unyielding.</p>
+                        <p class="product-price">$28.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="roast" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Morning Stogie</p>
+                        <p class="product-desc">Dark roasted coffee, tobacco and smoked vanilla — grit in every burn.</p>
+                        <p class="product-price">$26.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="roast" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Double Shot</p>
+                        <p class="product-desc">Espresso, dark rum and a slow burn of toasted tobacco leaf.</p>
+                        <p class="product-price">$27.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="bestseller" data-line="roast" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Press</p>
+                        <p class="product-desc">Cold press coffee, black leather and a hint of smoked cedar.</p>
+                        <p class="product-price">$28.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="reserve" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Aged Reserve</p>
+                        <p class="product-desc">Aged bourbon, scorched oak and black amber — earned, never rushed.</p>
+                        <p class="product-price">$29.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="new" data-line="reserve" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Cooperage</p>
+                        <p class="product-desc">New charred oak, vanilla bourbon and a deep smoked leather finish.</p>
+                        <p class="product-price">$30.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="bestseller" data-line="reserve" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Stillhouse</p>
+                        <p class="product-desc">Single malt whiskey, dark molasses and scorched cedarwood.</p>
+                        <p class="product-price">$32.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="gift" data-line="family" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Family Gift Set</p>
+                        <p class="product-desc">Three mafia collection candles beautifully boxed. Keep your stogie lit.</p>
+                        <p class="product-price">$75.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+            <!-- <div class="product-item" data-category="gift" data-line="lounge" data-page="3">
+                <div class="product-card">
+                    <div class="img-ph" style="height:240px;"></div>
+                    <div class="product-info">
+                        <p class="product-name">The Lounge Gift Set</p>
+                        <p class="product-desc">Five signature lounge scents — cedar, coffee, bourbon, tobacco &amp; leather.</p>
+                        <p class="product-price">$110.00</p>
+                        <a href="#" class="btn btn-dark">Add to Cart</a>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+
+        <div class="pagination">
+            <span id="prev-btn">‹</span>
+            <span class="page-btn active" data-page="1">1</span>
+            <span class="page-btn" data-page="2">2</span>
+            <span class="page-btn" data-page="3">3</span>
+            <span id="next-btn">›</span>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter -->
+<div class="newsletter">
+    <h2 class="section-title">Get Exclusive Deals</h2>
+    <p>Subscribe for special offers, new arrivals, and early access to limited releases.</p>
+    <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address">
+        <button type="submit">Subscribe</button>
+    </form>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container-xl">
+        <div class="row g-4 mb-5">
+            <div class="col-12 col-md-5">
+                <a href="index.html" class="footer-brand"><img src="img/darkStogie.png" alt="Stogie Candles" class="footer-logo"></a>
+                <p class="footer-tagline">Don't let the flame burn out.</p>
+                <a href="shop.html" class="stogie-lit">Keep your stogie lit</a>
+                <p class="footer-follow">Follow Us</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="X"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+                    <a href="#" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                    <a href="#" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a>
+                </div>
+            </div>
+            <div class="col-6 col-md footer-col">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="shop.html">All Candles</a></li>
+                    <li><a href="shop.html">Bestsellers</a></li>
+                    <li><a href="shop.html">New Arrivals</a></li>
+                    <li><a href="shop.html">Gift Sets</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md footer-col">
+                <h4>Help</h4>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="shipping.html">Shipping</a></li>
+                    <li><a href="returns.html">Returns</a></li>
+                    <li><a href='privacy.html'>Privacy Policy</a></li>
+                    <li><a href='terms.html'>Terms &amp; Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Stogie Candles. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="theme.js"></script>
+<script src="shop.js"></script>
+<script src="forms.js"></script>
+</body>
+</html>

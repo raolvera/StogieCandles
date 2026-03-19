@@ -1,0 +1,1143 @@
+/* ═══════════════════════════════════════════════════════════════
+   STOGIE CANDLES — Master Stylesheet
+   A luxury candle brand with a speakeasy aesthetic.
+   Built with CSS custom properties for light/dark theme support.
+   Typography: Cinzel (headings/nav/buttons) + Lora (body text)
+   ═══════════════════════════════════════════════════════════════ */
+
+
+/* ── Global Reset ──
+   Removes default browser margins, padding, and sets box-sizing
+   to border-box so padding is included in element width/height. */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   COLOR SCHEME — CSS Custom Properties (Variables)
+   All colors are defined here so the entire site can be
+   re-themed by changing values in one place.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Light Mode (default) ──
+   Cream backgrounds, deep brown text, gold accents.
+   Footer uses dark background with gold/cream text. */
+body {
+    --bg: #f3e9dc;              /* Main background — warm cream */
+    --bg2: #f3e9dc;             /* Secondary background (banners, newsletter) */
+    --bg3: #f3e9dc;             /* Tertiary background (alternating sections) */
+    --border: #c5a059;          /* Gold border used throughout */
+    --text: #3d2b1f;            /* Primary body text — deep brown */
+    --text2: #3d2b1f;           /* Secondary text (descriptions, subtitles) */
+    --text3: #3d2b1f;           /* Tertiary text (labels, muted elements) */
+    --heading: #3d2b1f;         /* Heading color — deep brown */
+    --nav-bg: #f3e9dc;          /* Navigation background */
+    --card-bg: #faf4ec;         /* Product/value card background — slightly lighter cream */
+    --input-bg: #faf4ec;        /* Form input background */
+    --ph: #e8d9c8;              /* Placeholder/empty image background */
+    --accent: #c5a059;          /* Primary accent — gold */
+    --accent-hover: #3d2b1f;    /* Accent hover state — deep brown */
+    --btn-bg: #c5a059;          /* Button background — gold */
+    --btn-text: #3d2b1f;        /* Button text — deep brown */
+    --btn-hover: #b38f4a;       /* Button hover — darker gold */
+    --footer-bg: #1a1110;       /* Footer background — near-black */
+    --footer-text: #f3e9dc;     /* Footer heading text — cream */
+    --footer-muted: #c5a059;    /* Footer body text and links — gold */
+    --footer-border: #c5a059;   /* Footer border — gold */
+}
+
+/* ── Dark Mode ──
+   Activated by adding class "dark" to <body>.
+   Near-black backgrounds, gold text, same gold accents. */
+body.dark {
+    --bg: #1a1110;              /* Main background — near-black brown */
+    --bg2: #1a1110;             /* Secondary background */
+    --bg3: #1a1110;             /* Tertiary background */
+    --border: #c5a059;          /* Gold border (same in both modes) */
+    --text: #c5a059;            /* Primary text — gold */
+    --text2: #c5a059;           /* Secondary text — gold */
+    --text3: #c5a059;           /* Tertiary text — gold */
+    --heading: #c5a059;         /* Headings — gold */
+    --nav-bg: #1a1110;          /* Navigation background */
+    --card-bg: #1a1110;         /* Card background */
+    --input-bg: #1a1110;        /* Input background */
+    --ph: #2a1e1a;              /* Placeholder background — slightly lighter than bg */
+    --accent: #d4b87a;          /* Accent — lighter warm gold for contrast */
+    --accent-hover: #3d2b1f;    /* Accent hover — deep brown */
+    --btn-bg: #c5a059;          /* Button background — gold */
+    --btn-text: #3d2b1f;        /* Button text — deep brown */
+    --btn-hover: #b38f4a;       /* Button hover — darker gold */
+    --footer-bg: #1a1110;       /* Footer background */
+    --footer-text: #f3e9dc;     /* Footer heading text — cream */
+    --footer-muted: #c5a059;    /* Footer body/links — gold */
+    --footer-border: #c5a059;   /* Footer border — gold */
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BASE STYLES
+   Global typography, links, images, and heading hierarchy.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Body defaults — Lora serif for body text, smooth theme transitions */
+body {
+    font-family: 'Lora', serif;
+    font-size: 1.08rem;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Remove default link underlines, inherit parent color */
+a { text-decoration: none; color: inherit; }
+
+/* Make all images block-level and full width by default */
+img { display: block; width: 100%; }
+
+/* All headings use Cinzel serif font with theme-aware color */
+h1, h2, h3, h4, h5, h6 { color: var(--heading); font-family: 'Cinzel', serif; }
+
+/* Responsive heading sizes using clamp() for fluid scaling
+   between mobile and desktop viewports */
+h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); }
+h2 { font-size: clamp(1.6rem, 3.5vw, 2.6rem); }
+h3 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); }
+h4 { font-size: 1.15rem; }
+
+/* Force dark mode headings to use the gold color variable
+   with !important to override Bootstrap defaults */
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark h5,
+body.dark h6 { color: var(--heading) !important; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   NAVIGATION
+   Sticky top navbar with logo, links, theme toggle,
+   and responsive hamburger menu.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Theme Toggle Buttons ──
+   Sun/moon icons for switching between light and dark mode.
+   Two versions: one for mobile menu, one for desktop. */
+#theme-toggle,
+#theme-toggle-lg {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+    flex-shrink: 0;
+    color: var(--accent);       /* Gold icon color */
+    opacity: 0.7;               /* Slightly dimmed by default */
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+/* Theme toggle hover — full opacity with gold glow */
+#theme-toggle:hover,
+#theme-toggle-lg:hover { opacity: 1; filter: drop-shadow(0 0 6px rgba(197,160,89,0.7)); }
+
+/* ── Main Navbar Container ──
+   Fixed height, sticky positioning, gold bottom border */
+#main-nav {
+    background: var(--nav-bg) !important;
+    border-bottom: 1px solid var(--border);
+    height: 64px;
+    padding-top: 0;
+    padding-bottom: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;             /* Stays above all other content */
+}
+
+/* Keep navbar content vertically centered */
+#main-nav .container-fluid {
+    height: 64px;
+    align-items: center;
+}
+
+/* ── Mobile Dropdown Menu ──
+   Positioned below the navbar, slides in with animation.
+   Only visible on screens smaller than 992px. */
+.navbar-collapse {
+    position: absolute;
+    top: 64px;                  /* Sits right below the navbar */
+    right: 0;
+    left: auto;
+    width: fit-content;
+    min-width: 0;
+    background: var(--nav-bg);
+    border: 1px solid var(--border);
+    padding: 16px 24px 20px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    z-index: 999;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform-origin: top;
+}
+
+/* Center nav items in the dropdown */
+.navbar-collapse .navbar-nav {
+    align-items: center;
+}
+
+/* Prevent text wrapping in dropdown items */
+.navbar-collapse .nav-item,
+.navbar-collapse .nav-link,
+.navbar-collapse .btn-nav {
+    white-space: nowrap;
+    width: auto;
+    text-align: center;
+}
+
+/* Hidden state — faded out and shifted up slightly */
+.navbar-collapse:not(.show) {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+}
+
+/* Visible state — fully opaque and in position */
+.navbar-collapse.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+/* Desktop breakpoint — reset dropdown to inline layout */
+@media (min-width: 992px) {
+    .navbar-collapse {
+        position: static;
+        background: none;
+        border: none;
+        padding: 0;
+        box-shadow: none;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+    }
+}
+
+/* ── Hamburger Menu Button ──
+   Gold border, no black outline, custom gold icon */
+.navbar-toggler {
+    border: 1px solid var(--accent);
+    outline: none;
+    box-shadow: none;
+    padding: 4px 8px;
+}
+
+/* Remove focus outline on hamburger */
+.navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+/* Hamburger hover — slight fade with gold glow */
+.navbar-toggler:hover {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 6px rgba(197,160,89,0.7));
+}
+
+/* Custom gold hamburger icon (3 horizontal lines) using inline SVG */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23c5a059' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    filter: none;
+}
+
+/* Same gold icon in dark mode */
+body.dark .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23c5a059' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+    filter: none;
+}
+
+/* ── Brand Logo Container ──
+   Holds SC icon + full logo side by side in the navbar */
+.nav-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--heading) !important;
+    letter-spacing: 2px;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;                  /* Space between SC icon and full logo */
+}
+
+/* Brand hover — fiery orange-red glow effect */
+.nav-brand:hover { color: #e8652e !important; text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+
+/* ── Nav Logo Images ──
+   Fixed dimensions to ensure light and dark mode logos match exactly */
+.nav-logo {
+    height: 52px;
+    width: auto !important;
+    max-height: 52px;
+    object-fit: contain;        /* Preserve aspect ratio */
+    transition: filter 0.3s ease;
+}
+
+/* SC icon — slightly taller, fixed width */
+.nav-logo.nav-sc {
+    height: 56px;
+    max-height: 56px;
+    width: 42px !important;
+    object-fit: contain;
+}
+
+/* Full logo (LogoDark/LogoLight) — wider, left-aligned */
+.nav-logo:not(.nav-sc) {
+    height: 52px;
+    width: 340px !important;
+    object-fit: contain;
+    object-position: left center;
+}
+
+/* Logo hover — fiery orange-red drop shadow glow */
+.nav-brand:hover .nav-logo {
+    filter: drop-shadow(0 0 6px rgba(232,101,46,0.7)) drop-shadow(0 0 12px rgba(232,101,46,0.4));
+}
+
+/* ── Logo Visibility Toggle ──
+   Light mode shows SCdark + LogoDark.
+   Dark mode shows SClight + LogoLight. */
+.nav-logo-light { display: block; }
+.nav-logo-dark { display: none; }
+
+body.dark .nav-logo-light { display: none; }
+body.dark .nav-logo-dark { display: block; }
+
+/* ── Responsive Logo — Tablet/Phone ──
+   Only the SC icon shows, centered in the navbar.
+   Full logo is hidden on smaller screens. */
+@media (max-width: 991px) {
+    #main-nav .container-fluid {
+        position: relative;
+    }
+    /* Center the brand logo absolutely */
+    .nav-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    /* Smaller SC icon on mobile */
+    .nav-logo.nav-sc { height: 44px; max-height: 44px; width: 34px !important; }
+    /* Hide the full logo on mobile */
+    .nav-logo:not(.nav-sc) { display: none !important; }
+}
+
+/* ── Nav Links ──
+   Uppercase Cinzel text with gold underline slide-in on hover */
+.navbar-nav .nav-link {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--heading) !important;
+    transition: color 0.2s;
+    padding: 8px 0;
+    position: relative;         /* For the ::after underline */
+}
+
+/* Animated underline — starts at 0 width, expands on hover */
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent);  /* Gold underline */
+    transition: width 0.3s ease;
+}
+
+/* Full underline on hover and active state */
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after { width: 100%; }
+
+/* Nav link hover/active — gold color with warm glow */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active { color: var(--accent) !important; text-shadow: 0 0 8px rgba(197,160,89,0.7), 0 0 16px rgba(197,160,89,0.4); }
+
+/* ── Shop Now Button (in nav) ──
+   Gold background, deep brown text, Cinzel font */
+.btn-nav {
+    background: var(--btn-bg);
+    color: var(--btn-text) !important;
+    padding: 8px 20px;
+    border-radius: 2px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    transition: background 0.2s;
+    display: inline-block;
+}
+
+/* Nav button hover — darker gold with warm glow */
+.btn-nav:hover { background: var(--btn-hover); box-shadow: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   HERO SECTION
+   Full-viewport hero with background image, dark overlay,
+   and centered content card.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Hero container — nearly full viewport height */
+.hero {
+    position: relative;
+    height: 88vh;
+    min-height: 520px;
+    background: var(--ph);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Hero background image — fills entire hero area */
+.hero-img-placeholder {
+    position: absolute;
+    inset: 0;                   /* Stretches to all edges */
+    background: url('img/hero.jpeg') center/cover no-repeat;
+}
+
+/* Dark overlay on hero image for better text readability */
+.hero-img-placeholder::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26,17,16,0.25);  /* 25% dark overlay */
+    pointer-events: none;              /* Clicks pass through */
+}
+
+/* Hero content card — semi-transparent with gold border */
+.hero-content {
+    position: relative;
+    z-index: 1;                 /* Above the background image */
+    text-align: center;
+    padding: 48px 60px;
+    background: rgba(243,233,220,0.82);  /* Light cream, 82% opacity */
+    border: 1px solid var(--border);
+}
+
+/* Dark mode hero card — darker, more opaque */
+body.dark .hero-content { background: rgba(26,17,16,0.88); }
+
+/* Hero heading — large Cinzel with wide letter spacing */
+.hero-content h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 5vw, 3.6rem);
+    font-weight: 700;
+    color: var(--heading);
+    letter-spacing: 4px;
+    margin-bottom: 16px;
+}
+
+/* Hero paragraph — constrained width for readability */
+.hero-content p {
+    font-size: 1.12rem;
+    color: var(--text2);
+    max-width: 480px;
+    margin: 0 auto 28px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   BUTTONS
+   Two styles: solid (btn-dark) and outline (btn-outline).
+   Both use Cinzel font with uppercase text and gold glow on hover.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Base button styles shared by all button types */
+.btn {
+    display: inline-block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 36px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Solid button — gold background, deep brown text */
+.btn-dark {
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    border: 1px solid var(--btn-bg);
+}
+
+/* Solid button hover — darker gold with warm glow */
+.btn-dark:hover { background: var(--btn-hover); border-color: var(--btn-hover); box-shadow: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3); }
+
+/* Outline button — transparent with gold border and text */
+.btn-outline {
+    background: transparent;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+/* Outline button hover — fills with gold, text goes dark */
+.btn-outline:hover { background: var(--accent); color: var(--btn-text); box-shadow: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CONTENT SECTIONS
+   Padding, labels, titles, and subtitles used across all pages.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Default section padding */
+section { padding: 80px 40px; background: var(--bg); }
+
+/* Small uppercase label above section titles (e.g., "The Collection") */
+.section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 12px;
+}
+
+/* Section title — responsive sizing with Cinzel */
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    color: var(--heading);
+    margin-bottom: 16px;
+}
+
+/* Section subtitle — constrained width for readability */
+.section-sub {
+    font-size: 1.12rem;
+    color: var(--text2);
+    max-width: 560px;
+    margin-bottom: 40px;
+}
+
+/* Center-aligned section variant */
+.section-center { text-align: center; }
+.section-center .section-sub { margin-left: auto; margin-right: auto; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   AD BANNER
+   Promotional strip between sections with gold borders.
+   Dark mode uses a gradient background.
+   ═══════════════════════════════════════════════════════════════ */
+
+.ad-banner {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 14px 20px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    letter-spacing: 2px;
+    color: var(--text2);
+}
+
+/* Dark mode ad banner — deep brown to black gradient */
+body.dark .ad-banner {
+    background: linear-gradient(135deg, #3d2b1f, #1a1110);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   IMAGE PLACEHOLDER
+   Used for all section images. Includes a dark overlay
+   via ::after pseudo-element for consistent lighting.
+   ═══════════════════════════════════════════════════════════════ */
+
+.img-ph {
+    background: var(--ph);
+    background-size: 100% 100%;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* Dark overlay applied to all image placeholders for uniform lighting */
+.img-ph::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26,17,16,0.25);  /* 25% dark tint */
+    pointer-events: none;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PRODUCT GRID (Shop Page)
+   3-column grid on desktop, 2 on tablet, 1 on mobile.
+   Each card has an image, name, description, price, and CTA.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Grid layout — 3 equal columns with 28px gap */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+/* Prevent grid items from overflowing */
+.products-grid > [data-category] {
+    min-width: 0;
+}
+
+/* Tablet — 2 columns */
+@media (max-width: 991px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Mobile — single column */
+@media (max-width: 575px) {
+    .products-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Product Card ──
+   Bordered card with gold accent, flex column layout */
+.product-card {
+    background: var(--card-bg);
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    height: 100%;               /* Equal height cards in grid */
+}
+
+/* Card hover — warm gold glow effect */
+.product-card:hover { box-shadow: 0 0 12px rgba(197,160,89,0.5), 0 0 24px rgba(197,160,89,0.25); }
+
+/* Product card image — uses StogieCandle.png as background */
+.product-card .img-ph {
+    height: 380px;
+    flex-shrink: 0;
+    background: url('img/StogieCandle.png') center/cover no-repeat;
+}
+
+/* Product info section — flex column pushes price to bottom */
+.product-info { padding: 20px; display: flex; flex-direction: column; flex: 1; }
+
+/* Price stays at bottom of card */
+.product-info .product-price { margin-top: auto; }
+
+/* Product item wrapper */
+.product-item { display: flex; }
+
+/* Product name — Cinzel with letter spacing */
+.product-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--heading);
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+
+/* Product description and price */
+.product-desc { font-size: 1rem; color: var(--text2); margin-bottom: 14px; }
+.product-price { font-size: 1.15rem; color: var(--text); font-weight: 700; margin-bottom: 16px; margin-top: auto; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FILTER BAR (Shop Page)
+   Horizontal row of category buttons for filtering products.
+   Active/hover state uses gold background with glow.
+   ═══════════════════════════════════════════════════════════════ */
+
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;            /* Wraps on smaller screens */
+    margin-bottom: 40px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Individual filter button */
+.filter-btn {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    padding: 8px 20px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--bg);
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+/* Active/hover filter — gold fill with warm glow */
+.filter-btn:hover,
+.filter-btn.active { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); box-shadow: 0 0 8px rgba(197,160,89,0.5), 0 0 16px rgba(197,160,89,0.3); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PAGINATION (Shop Page)
+   Centered page number buttons below the product grid.
+   ═══════════════════════════════════════════════════════════════ */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 48px;
+}
+
+/* Individual page number */
+.pagination span {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    cursor: pointer;
+    color: var(--text2);
+    transition: all 0.2s;
+}
+
+/* Active/hover page — gold fill with glow */
+.pagination span.active,
+.pagination span:hover { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); box-shadow: 0 0 8px rgba(197,160,89,0.5), 0 0 16px rgba(197,160,89,0.3); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   NEWSLETTER SECTION
+   Email signup form with inline input and submit button.
+   ═══════════════════════════════════════════════════════════════ */
+
+.newsletter {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+    padding: 72px 40px;
+}
+
+.newsletter .section-title { margin-bottom: 10px; }
+.newsletter p { font-size: 1.12rem; color: var(--text2); margin-bottom: 28px; }
+
+/* Inline form — input and button side by side */
+.newsletter-form {
+    display: flex;
+    gap: 0;
+    justify-content: center;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* Email input — shares border with button */
+.newsletter-form input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid var(--border);
+    border-right: none;         /* Seamless join with button */
+    border-radius: 2px 0 0 2px;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--input-bg);
+    outline: none;
+}
+
+/* Input focus — border darkens */
+.newsletter-form input:focus { border-color: var(--text3); }
+
+/* Subscribe button — gold, joins seamlessly with input */
+.newsletter-form button {
+    padding: 14px 28px;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    border: 1px solid var(--btn-bg);
+    border-radius: 0 2px 2px 0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* Button hover — darker gold with glow */
+.newsletter-form button:hover { background: var(--btn-hover); box-shadow: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TWO-COLUMN LAYOUT (Zigzag Sections)
+   Used on Home and About pages for alternating image/text rows.
+   ═══════════════════════════════════════════════════════════════ */
+
+.two-col-text h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: var(--heading);
+    margin-bottom: 16px;
+}
+
+.two-col-text p { font-size: 1.12rem; color: var(--text2); margin-bottom: 20px; }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   VALUE CARDS (About Page)
+   Three cards showing Quality, Craftsmanship, Experience.
+   ═══════════════════════════════════════════════════════════════ */
+
+.value-card {
+    text-align: center;
+    padding: 36px 24px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    background: var(--card-bg);
+}
+
+/* Flame icon above each value */
+.value-icon { font-size: 2rem; color: var(--accent); margin-bottom: 16px; }
+
+.value-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    letter-spacing: 2px;
+    color: var(--heading);
+    margin-bottom: 10px;
+}
+
+.value-card p { font-size: 1.02rem; color: var(--text2); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TEAM SECTION (About Page)
+   Team member cards with photo overlay for consistent lighting.
+   ═══════════════════════════════════════════════════════════════ */
+
+.team-card { text-align: center; position: relative; }
+.team-card img { position: relative; }
+
+/* Image overlay wrapper — contains the ::after dark tint */
+.team-card .img-overlay {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+/* Dark overlay on team photos for consistent lighting */
+.team-card .img-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(26,17,16,0.2);  /* 20% dark tint */
+    pointer-events: none;
+    border-radius: 2px;
+}
+
+.team-card .img-ph { height: 260px; border-radius: 2px; margin-bottom: 16px; }
+.team-name { font-family: 'Cinzel', serif; font-size: 1rem; color: var(--heading); margin-bottom: 4px; }
+.team-role { font-size: 0.92rem; color: var(--text2); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   CONTACT PAGE
+   Form fields, contact info, and social links.
+   ═══════════════════════════════════════════════════════════════ */
+
+.contact-form h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: var(--heading);
+    margin-bottom: 28px;
+}
+
+/* Form field wrapper — spacing between fields */
+.form-field { margin-bottom: 18px; }
+
+/* Form labels — small uppercase Cinzel */
+.form-field label {
+    display: block;
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+}
+
+/* Form inputs, textareas, and selects — consistent styling */
+.form-field input,
+.form-field textarea,
+.form-field select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    font-family: 'Lora', serif;
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--input-bg);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* Input focus state */
+.form-field input:focus,
+.form-field textarea:focus { border-color: var(--text3); }
+
+/* Textarea — fixed height, no resize */
+.form-field textarea { height: 130px; resize: none; }
+
+/* Contact info heading */
+.contact-info h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    color: var(--heading);
+    margin-bottom: 28px;
+}
+
+/* Individual info items (email, phone, hours) */
+.info-item { margin-bottom: 24px; }
+
+.info-item h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 4px;
+}
+
+.info-item p { font-size: 1rem; color: var(--text2); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MAP PLACEHOLDER (Contact Page)
+   ═══════════════════════════════════════════════════════════════ */
+
+.map-placeholder {
+    background: var(--ph);
+    height: 320px;
+    margin-top: 60px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FAQ SECTION
+   Question/answer pairs with gold borders between items.
+   ═══════════════════════════════════════════════════════════════ */
+
+.faq-list { max-width: 720px; margin: 0 auto; }
+
+.faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+}
+
+/* Top border on first FAQ item */
+.faq-item:first-child { border-top: 1px solid var(--border); }
+
+/* FAQ question — Cinzel heading style */
+.faq-q {
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    color: var(--heading);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+/* FAQ answer — body text */
+.faq-a { font-size: 1.02rem; color: var(--text2); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   FOOTER
+   Dark background section with logo, tagline, social links,
+   navigation columns, and copyright. Consistent across all pages.
+   ═══════════════════════════════════════════════════════════════ */
+
+footer {
+    background: var(--footer-bg);   /* Near-black background */
+    color: var(--footer-muted);     /* Gold text by default */
+    padding: 56px 40px 32px;
+}
+
+/* ── Footer Brand/Logo ── */
+.footer-brand {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--footer-text);      /* Cream text */
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    transition: color 0.2s;
+    display: inline-block;
+}
+
+/* Footer brand hover — fiery orange-red glow */
+.footer-brand:hover { text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+
+/* Footer logo image hover — matching orange-red drop shadow */
+.footer-brand:hover .footer-logo {
+    filter: drop-shadow(0 0 6px rgba(232,101,46,0.7)) drop-shadow(0 0 12px rgba(232,101,46,0.4));
+}
+
+/* Footer logo — darkStogie.png recolored via JS canvas */
+.footer-logo {
+    display: block;
+    height: 120px;
+    width: auto;
+}
+
+/* Footer tagline — "Don't let the flame burn out." */
+.footer-tagline { font-size: 1rem; color: var(--footer-muted); margin-bottom: 20px; }
+
+/* "Follow Us" label above social icons */
+.footer-follow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--footer-muted);
+    margin-bottom: 10px;
+}
+
+/* ── Footer Social Icons ──
+   Circular bordered icons for X, Facebook, Instagram */
+.footer-social { display: flex; gap: 12px; }
+
+.footer-social a {
+    width: 34px; height: 34px;
+    border: 1px solid var(--footer-border);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.82rem;
+    color: var(--footer-muted);
+    transition: all 0.2s;
+}
+
+/* Social icon hover — fiery orange-red with glow */
+.footer-social a:hover { border-color: #e8652e; color: #e8652e; text-shadow: 0 0 8px rgba(232,101,46,0.7); box-shadow: 0 0 8px rgba(232,101,46,0.5); }
+
+/* Contact page social icons — use body theme colors instead of footer colors */
+.contact-info .footer-social a {
+    border-color: var(--border);
+    color: var(--text2);
+}
+
+/* Contact page social hover — uses body text color */
+.contact-info .footer-social a:hover {
+    border-color: var(--text);
+    color: var(--text);
+    background: transparent;
+    box-shadow: 0 0 8px rgba(197,160,89,0.5);
+}
+
+/* ── Footer Navigation Columns ──
+   Shop, Company, Help link lists */
+.footer-col h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--footer-text);      /* Cream headings */
+    margin-bottom: 16px;
+}
+
+.footer-col ul { list-style: none; padding-left: 0; }
+
+.footer-col ul li { margin-bottom: 10px; }
+
+/* Footer links — gold, slide right on hover */
+.footer-col ul li a {
+    font-size: 1rem;
+    color: var(--footer-muted);
+    transition: color 0.2s, padding-left 0.2s;
+}
+
+/* Footer link hover — fiery orange-red with glow and slight indent */
+.footer-col ul li a:hover { color: #e8652e; padding-left: 4px; text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+
+/* ── Footer Bottom ──
+   Copyright line with gold top border */
+.footer-bottom {
+    border-top: 1px solid var(--footer-border);
+    padding-top: 24px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--footer-muted);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   "KEEP YOUR STOGIE LIT" LINK
+   Signature CTA used throughout the site with flame icons
+   on both sides. Uses CSS mask for the flame SVG.
+   ═══════════════════════════════════════════════════════════════ */
+
+.stogie-lit {
+    font-family: 'Cinzel', serif;
+    font-size: 0.88rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--footer-muted);     /* Gold text */
+    margin-top: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+/* Flame icons on left and right side of text
+   Uses CSS mask-image with an inline SVG flame shape.
+   The icon color inherits from currentColor via background-color. */
+.stogie-lit::before,
+.stogie-lit::after {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    background-color: currentColor;
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2C12 2 7 7 7 13a5 5 0 0 0 10 0c0-2.5-1.5-5-2.5-6 0 1.5-1 2.5-2 2.5S11 8.5 12 2z'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2C12 2 7 7 7 13a5 5 0 0 0 10 0c0-2.5-1.5-5-2.5-6 0 1.5-1 2.5-2 2.5S11 8.5 12 2z'/%3E%3C/svg%3E");
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+}
+
+/* Hover — fiery orange-red with flame glow (all pages) */
+.stogie-lit:hover { color: #e8652e; text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+
+/* Footer-specific stogie-lit — left-aligned instead of centered */
+footer .stogie-lit { color: var(--footer-muted); justify-content: flex-start; }
+
+/* Footer stogie-lit hover — same fiery orange-red */
+footer .stogie-lit:hover { color: #e8652e; text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   RESPONSIVE — MOBILE NEWSLETTER
+   Stacks the email input and button vertically on small screens.
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 600px) {
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid var(--border); border-radius: 2px; border-bottom: none; }
+    .newsletter-form button { border-radius: 2px; }
+}
