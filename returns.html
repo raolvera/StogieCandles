@@ -1,24 +1,33 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta & SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stogie Candles | Returns</title>
+
+    <!-- Favicon — flame emoji as inline SVG -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+
+    <!-- Fonts & Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- Navigation — Sticky top navbar (shared component) -->
 <nav class="navbar navbar-expand-lg sticky-top" id="main-nav">
     <div class="container-fluid px-4">
+        <!-- Brand logos -->
         <a href="index.html" class="nav-brand navbar-brand"><img src="img/SCdark.png" alt="SC" class="nav-logo nav-logo-light nav-sc"><img src="img/SClight.png" alt="SC" class="nav-logo nav-logo-dark nav-sc"><img src="img/LogoDark.png" alt="Stogie Candles" class="nav-logo nav-logo-light"><img src="img/LogoLight.png" alt="Stogie Candles" class="nav-logo nav-logo-dark"></a>
+        <!-- Mobile hamburger toggle -->
         <div class="d-flex align-items-center gap-3 d-lg-none ms-auto">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
+        <!-- Collapsible nav menu -->
         <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
@@ -26,6 +35,7 @@
                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 <li class="nav-item"><a href="shop.html" class="btn-nav">Shop Now</a></li>
+                <!-- Mobile theme toggle -->
                 <li class="nav-item d-lg-none mt-2">
                     <button id="theme-toggle" aria-label="Toggle theme" class="d-flex align-items-center gap-2 nav-link px-0">
                         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -33,6 +43,7 @@
                     </button>
                 </li>
             </ul>
+            <!-- Desktop theme toggle -->
             <button id="theme-toggle-lg" aria-label="Toggle theme" class="d-none d-lg-flex ms-4">
                 <svg id="icon-sun-lg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                 <svg id="icon-moon-lg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -41,7 +52,7 @@
     </div>
 </nav>
 
-<!-- Page Hero -->
+<!-- PAGE HERO — Shorter hero (40vh) with "Returns" heading. -->
 <section class="hero" style="height:40vh; min-height:280px;">
     <div class="hero-img-placeholder"></div>
     <div class="hero-content">
@@ -51,7 +62,8 @@
     </div>
 </section>
 
-<!-- Returns Info -->
+<!-- RETURNS INFO — FAQ-style list covering return window, process,
+     refunds, exchanges, damaged items, non-returnable items, gifts. -->
 <section>
     <div class="container-xl" style="max-width:780px;">
         <p class="section-label">Policy</p>
@@ -64,11 +76,11 @@
             </div>
             <div class="faq-item">
                 <p class="faq-q">How to Start a Return</p>
-                <p class="faq-a">Email us at hello@stogiecandles.com with your order number and reason for return. We'll respond within 1–2 business days with return instructions and a prepaid shipping label.</p>
+                <p class="faq-a">Email us at hello@stogiecandles.com with your order number and reason for return. We'll respond within 1—2 business days with return instructions and a prepaid shipping label.</p>
             </div>
             <div class="faq-item">
                 <p class="faq-q">Refunds</p>
-                <p class="faq-a">Once we receive and inspect your return, a refund will be issued to your original payment method within 5–7 business days. You'll receive an email confirmation when the refund is processed.</p>
+                <p class="faq-a">Once we receive and inspect your return, a refund will be issued to your original payment method within 5—7 business days. You'll receive an email confirmation when the refund is processed.</p>
             </div>
             <div class="faq-item">
                 <p class="faq-q">Exchanges</p>
@@ -99,7 +111,7 @@
     </div>
 </section>
 
-<!-- Footer -->
+<!-- Footer — Shared site footer -->
 <footer>
     <div class="container-xl">
         <div class="row g-4 mb-5">
@@ -142,11 +154,12 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Stogie Candles. All Rights Reserved.</p>
+            <p>— 2026 Stogie Candles. All Rights Reserved.</p>
         </div>
     </div>
 </footer>
 
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="theme.js"></script>
 <script src="forms.js"></script>
