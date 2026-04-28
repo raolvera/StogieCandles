@@ -255,6 +255,7 @@ function renderCart() {
 
 // continue shopping — close the drawer
 document.getElementById('cart-continue-btn').addEventListener('click', closeCart);
+document.getElementById('cart-close').addEventListener('click', closeCart);
 cartFab.addEventListener('click', openCart);
 cartOverlay.addEventListener('click', closeCart);
 
@@ -321,9 +322,8 @@ function addToCart(card, qtySelector) {
     const btn = card.querySelector('.btn-add-cart') ||
                 document.getElementById('modal-cart-btn');
     if (btn) {
-        const orig = btn.textContent;
         btn.textContent = 'Added ✓';
-        setTimeout(() => { btn.textContent = orig; }, 1500);
+        setTimeout(() => { btn.textContent = 'Add to Cart'; }, 1500);
     }
 
     // open the cart drawer
