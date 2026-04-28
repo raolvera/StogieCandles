@@ -433,6 +433,8 @@ body.dark .nav-logo-dark { display: block; }
     padding: 48px 60px;
     background: rgba(243,233,220,0.88);  /* Light cream, 88% opacity */
     border: 1px solid var(--border);
+    max-width: 90vw;
+    box-sizing: border-box;
 }
 
 /* Dark mode hero card — darker, more opaque */
@@ -1378,4 +1380,63 @@ footer .stogie-lit:hover { color: var(--fire); text-shadow: var(--glow-fire); }
     footer .stogie-lit { justify-content: center; }
     footer .footer-follow { text-align: center; }
     footer .footer-social { justify-content: center; }
+}
+
+
+/* RESPONSIVE — TABLET (768px and below)
+   Reduce hero padding, section padding, and scale down elements. */
+@media (max-width: 768px) {
+    .hero { height: 70vh; min-height: 400px; }
+    .hero-content { padding: 32px 28px; margin: 0 20px; max-width: 90vw; }
+    .hero-content h1 { letter-spacing: 2px; margin-bottom: 12px; }
+    .hero-content p { font-size: 1rem; margin-bottom: 20px; }
+
+    section { padding: 50px 24px; }
+
+    .two-col-text h2 { font-size: 1.5rem; }
+    .two-col-text p { font-size: 1rem; }
+
+    .filter-bar { gap: 6px; margin-bottom: 28px; }
+    .filter-btn { padding: 6px 14px; font-size: 0.75rem; }
+
+    .value-card { padding: 24px 16px; }
+
+    .contact-form h2,
+    .contact-info h2 { font-size: 1.2rem; }
+}
+
+/* RESPONSIVE — PHONE (480px and below)
+   Further reduce hero, tighten spacing, stack elements. */
+@media (max-width: 480px) {
+    .hero { height: 60vh; min-height: 340px; }
+    .hero-content { padding: 24px 18px; margin: 0 12px; }
+    .hero-content h1 { font-size: 1.6rem; letter-spacing: 1px; }
+    .hero-content p { font-size: 0.92rem; margin-bottom: 16px; }
+
+    section { padding: 40px 16px; }
+
+    .section-title { font-size: 1.2rem; }
+    .section-sub { font-size: 0.95rem; }
+    .section-label { font-size: 0.78rem; letter-spacing: 2px; }
+
+    .btn { padding: 12px 24px; font-size: 0.8rem; }
+    .btn-nav { padding: 6px 14px; font-size: 0.75rem; }
+
+    .ad-banner { font-size: 0.75rem; padding: 10px 12px; letter-spacing: 1px; }
+
+    .newsletter { padding: 48px 16px; }
+    .newsletter p { font-size: 0.95rem; }
+
+    footer { padding: 40px 20px 24px; }
+
+    .product-card .img-ph { height: 260px; }
+
+    .qty-selector { margin-bottom: 10px; }
+
+    .stogie-lit { font-size: 0.78rem; letter-spacing: 2px; }
+
+    .faq-q { font-size: 0.95rem; }
+    .faq-a { font-size: 0.92rem; }
+
+    .cart-drawer { width: 100%; max-width: 100vw; }
 }
