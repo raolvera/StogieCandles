@@ -211,7 +211,6 @@ const cartItemsEl = document.getElementById('cart-items');
 const cartTotalEl = document.getElementById('cart-total-price');
 const cartCountEl = document.getElementById('cart-count');
 const cartFab     = document.getElementById('cart-fab');
-const cartCloseEl = document.getElementById('cart-close');
 
 function openCart() {
     cartDrawer.classList.add('active');
@@ -254,9 +253,9 @@ function renderCart() {
     cartTotalEl.textContent = '$' + getCartTotal().toFixed(2);
 }
 
-// open/close cart
+// continue shopping — close the drawer
+document.getElementById('cart-continue-btn').addEventListener('click', closeCart);
 cartFab.addEventListener('click', openCart);
-cartCloseEl.addEventListener('click', closeCart);
 cartOverlay.addEventListener('click', closeCart);
 
 // remove item or adjust quantity in cart
@@ -286,9 +285,6 @@ cartItemsEl.addEventListener('click', e => {
         renderCart();
     }
 });
-
-// continue shopping — just close the drawer
-document.getElementById('cart-continue-btn').addEventListener('click', closeCart);
 
 // clear entire cart
 document.getElementById('cart-clear-btn').addEventListener('click', () => {
