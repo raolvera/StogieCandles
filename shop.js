@@ -240,7 +240,11 @@ function renderCart() {
         <div class="cart-item">
             <div class="cart-item-info">
                 <p class="cart-item-name">${item.name}</p>
-                <p class="cart-item-qty">Qty: ${item.quantity}</p>
+                <div class="cart-item-qty-controls">
+                    <button data-index="${i}" data-action="minus">−</button>
+                    <span>${item.quantity}</span>
+                    <button data-index="${i}" data-action="plus">+</button>
+                </div>
             </div>
             <span class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</span>
             <button class="cart-item-remove" data-index="${i}" aria-label="Remove">&times;</button>
@@ -255,11 +259,40 @@ cartFab.addEventListener('click', openCart);
 cartCloseEl.addEventListener('click', closeCart);
 cartOverlay.addEventListener('click', closeCart);
 
-// remove item from cart
+// remove item or adjust quantity in cart
 cartItemsEl.addEventListener('click', e => {
     const removeBtn = e.target.closest('.cart-item-remove');
-    if (!removeBtn) return;
-    cart.splice(parseInt(removeBtn.dataset.index), 1);
+    if (removeBtn) {
+        cart.splice(parseInt(removeBtn.dataset.index), 1);
+        saveCart();
+        renderCart();
+        return;
+    }
+
+    const qtyBtn = e.target.closest('.cart-item-qty-controls button');
+    if (qtyBtn) {
+        const idx    = parseInt(qtyBtn.dataset.index);
+        const action = qtyBtn.dataset.action;
+
+        if (action === 'plus' && cart[idx].quantity < 3) {
+            cart[idx].quantity++;
+        } else if (action === 'minus' && cart[idx].quantity > 1) {
+            cart[idx].quantity--;
+        } else if (action === 'minus' && cart[idx].quantity === 1) {
+            cart.splice(idx, 1);
+        }
+
+        saveCart();
+        renderCart();
+    }
+});
+
+// continue shopping — just close the drawer
+document.getElementById('cart-continue-btn').addEventListener('click', closeCart);
+
+// clear entire cart
+document.getElementById('cart-clear-btn').addEventListener('click', () => {
+    cart = [];
     saveCart();
     renderCart();
 });
