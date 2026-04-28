@@ -1386,15 +1386,21 @@ footer .stogie-lit:hover { color: var(--fire); text-shadow: var(--glow-fire); }
 /* RESPONSIVE — TABLET (768px and below)
    Reduce hero padding, section padding, and scale down elements. */
 @media (max-width: 768px) {
-    .hero { height: 70vh; min-height: 400px; }
-    .hero-content { padding: 32px 28px; margin: 0 20px; max-width: 90vw; }
+    .hero { height: auto; min-height: 50vh; padding: 60px 20px; }
+    .hero-content {
+        padding: 28px 24px;
+        margin: 0;
+        max-width: 100%;
+    }
     .hero-content h1 { letter-spacing: 2px; margin-bottom: 12px; }
-    .hero-content p { font-size: 1rem; margin-bottom: 20px; }
+    .hero-content p { font-size: 1rem; margin-bottom: 20px; max-width: 100%; }
 
     section { padding: 50px 24px; }
 
     .two-col-text h2 { font-size: 1.5rem; }
     .two-col-text p { font-size: 1rem; }
+
+    .img-ph { height: 260px !important; }
 
     .filter-bar { gap: 6px; margin-bottom: 28px; }
     .filter-btn { padding: 6px 14px; font-size: 0.75rem; }
@@ -1408,35 +1414,39 @@ footer .stogie-lit:hover { color: var(--fire); text-shadow: var(--glow-fire); }
 /* RESPONSIVE — PHONE (480px and below)
    Further reduce hero, tighten spacing, stack elements. */
 @media (max-width: 480px) {
-    .hero { height: 60vh; min-height: 340px; }
-    .hero-content { padding: 24px 18px; margin: 0 12px; }
-    .hero-content h1 { font-size: 1.6rem; letter-spacing: 1px; }
-    .hero-content p { font-size: 0.92rem; margin-bottom: 16px; }
+    .hero { min-height: 40vh; padding: 40px 12px; }
+    .hero-content { padding: 20px 16px; }
+    .hero-content h1 { font-size: 1.5rem; letter-spacing: 1px; }
+    .hero-content p { font-size: 0.88rem; margin-bottom: 14px; }
 
-    section { padding: 40px 16px; }
+    section { padding: 36px 14px; }
 
     .section-title { font-size: 1.2rem; }
-    .section-sub { font-size: 0.95rem; }
+    .section-sub { font-size: 0.92rem; }
     .section-label { font-size: 0.78rem; letter-spacing: 2px; }
 
-    .btn { padding: 12px 24px; font-size: 0.8rem; }
+    .btn { padding: 10px 20px; font-size: 0.78rem; }
     .btn-nav { padding: 6px 14px; font-size: 0.75rem; }
 
-    .ad-banner { font-size: 0.75rem; padding: 10px 12px; letter-spacing: 1px; }
+    .ad-banner { font-size: 0.72rem; padding: 10px 12px; letter-spacing: 1px; }
 
-    .newsletter { padding: 48px 16px; }
-    .newsletter p { font-size: 0.95rem; }
+    .newsletter { padding: 40px 14px; }
+    .newsletter p { font-size: 0.92rem; }
 
-    footer { padding: 40px 20px 24px; }
+    footer { padding: 36px 16px 24px; }
 
-    .product-card .img-ph { height: 260px; }
+    .img-ph { height: 220px !important; }
+    .product-card .img-ph { height: 220px !important; }
 
     .qty-selector { margin-bottom: 10px; }
 
-    .stogie-lit { font-size: 0.78rem; letter-spacing: 2px; }
+    .stogie-lit { font-size: 0.75rem; letter-spacing: 2px; gap: 6px; }
+    .stogie-lit .sc-icon { height: 14px; }
 
-    .faq-q { font-size: 0.95rem; }
-    .faq-a { font-size: 0.92rem; }
+    .faq-q { font-size: 0.92rem; }
+    .faq-a { font-size: 0.88rem; }
 
     .cart-drawer { width: 100%; max-width: 100vw; }
+
+    .nav-logo.nav-sc { height: 38px; max-height: 38px; width: 30px !important; }
 }
