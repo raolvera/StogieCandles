@@ -1,7 +1,17 @@
-/* STOGIE CANDLES — Master Stylesheet
-   A luxury candle brand with a speakeasy aesthetic.
-   Built with CSS custom properties for light/dark theme support.
-   Typography: Cinzel (headings/nav/buttons) + Lora (body text) */
+/*
+ * style.css
+ * Stogie Candles — Master Stylesheet
+ *
+ * A luxury candle brand with a speakeasy aesthetic.
+ * Built with CSS custom properties for light/dark theme support.
+ * Typography: Cinzel (headings/nav/buttons) + Lora (body text)
+ *
+ * Color system uses four reusable glow variables:
+ *   --glow-gold     main gold shadow (buttons, cards)
+ *   --glow-gold-sm  smaller gold shadow (filters, pagination)
+ *   --glow-fire     orange-red hover glow (links, social icons)
+ *   --fire          solid orange-red for hover text color
+ */
 
 
 /* Global Reset
@@ -39,11 +49,19 @@ body {
     --footer-text: #f3e9dc;     /* Footer heading text — cream */
     --footer-muted: #c5a059;    /* Footer body text and links — gold */
     --footer-border: #c5a059;   /* Footer border — gold */
+    --glow-gold: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3);
+    --glow-gold-sm: 0 0 8px rgba(197,160,89,0.5), 0 0 16px rgba(197,160,89,0.3);
+    --glow-fire: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4);
+    --fire: #e8652e;
 }
 
 /* Dark Mode
    Activated by adding class "dark" to <body>.
    Near-black backgrounds, gold text, same gold accents. */
+
+/* Preload dark mode — applied via <html> class before body renders to prevent flash */
+html.dark-preload { background: #1a1110; }
+
 body.dark {
     --bg: #1a1110;              /* Main background — near-black brown */
     --bg2: #1a1110;             /* Secondary background */
@@ -66,6 +84,10 @@ body.dark {
     --footer-text: #f3e9dc;     /* Footer heading text — cream */
     --footer-muted: #c5a059;    /* Footer body/links — gold */
     --footer-border: #c5a059;   /* Footer border — gold */
+    --glow-gold: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3);
+    --glow-gold-sm: 0 0 8px rgba(197,160,89,0.5), 0 0 16px rgba(197,160,89,0.3);
+    --glow-fire: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4);
+    --fire: #e8652e;
 }
 
 
@@ -236,14 +258,9 @@ body.dark h6 { color: var(--heading) !important; }
     filter: drop-shadow(0 0 6px rgba(197,160,89,0.7));
 }
 
-/* Custom gold hamburger icon (3 horizontal lines) using inline SVG */
+/* Custom gold hamburger icon (3 horizontal lines) using inline SVG.
+   Same icon in both light and dark mode since gold color is shared. */
 .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23c5a059' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
-    filter: none;
-}
-
-/* Same gold icon in dark mode */
-body.dark .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Cpath stroke='%23c5a059' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
     filter: none;
 }
@@ -263,7 +280,7 @@ body.dark .navbar-toggler-icon {
 }
 
 /* Brand hover — fiery orange-red glow effect */
-.nav-brand:hover { color: #e8652e !important; text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+.nav-brand:hover { color: var(--fire) !important; text-shadow: var(--glow-fire); }
 
 /* Nav Logo Images
    Fixed dimensions to ensure light and dark mode logos match exactly */
@@ -271,7 +288,7 @@ body.dark .navbar-toggler-icon {
     height: 52px;
     width: auto !important;
     max-height: 52px;
-    object-fit: contain;        /* Preserve aspect ratio */
+    object-fit: contain;
     transition: filter 0.3s ease;
 }
 
@@ -280,14 +297,12 @@ body.dark .navbar-toggler-icon {
     height: 56px;
     max-height: 56px;
     width: 42px !important;
-    object-fit: contain;
 }
 
 /* Full logo (LogoDark/LogoLight) — wider, left-aligned */
 .nav-logo:not(.nav-sc) {
     height: 52px;
     width: 340px !important;
-    object-fit: contain;
     object-position: left center;
 }
 
@@ -349,13 +364,16 @@ body.dark .nav-logo-dark { display: block; }
     transition: width 0.3s ease;
 }
 
+/* No underline on theme toggle buttons */
+#theme-toggle::after { content: none; }
+
 /* Full underline on hover and active state */
 .navbar-nav .nav-link:hover::after,
 .navbar-nav .nav-link.active::after { width: 100%; }
 
 /* Nav link hover/active — gold color with warm glow */
 .navbar-nav .nav-link:hover,
-.navbar-nav .nav-link.active { color: var(--accent) !important; text-shadow: 0 0 8px rgba(197,160,89,0.7), 0 0 16px rgba(197,160,89,0.4); }
+.navbar-nav .nav-link.active { color: var(--accent) !important; text-shadow: var(--glow-fire); }
 
 /* Shop Now Button (in nav)
    Gold background, deep brown text, Cinzel font */
@@ -372,7 +390,7 @@ body.dark .nav-logo-dark { display: block; }
 }
 
 /* Nav button hover — darker gold with warm glow */
-.btn-nav:hover { background: var(--btn-hover); box-shadow: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3); }
+.btn-nav:hover { background: var(--btn-hover); box-shadow: var(--glow-gold); }
 
 
 /* HERO SECTION
@@ -403,7 +421,7 @@ body.dark .nav-logo-dark { display: block; }
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(26,17,16,0.25);  /* 25% dark overlay */
+    background: rgba(26,17,16,0.45);  /* 45% dark overlay for readability */
     pointer-events: none;              /* Clicks pass through */
 }
 
@@ -413,19 +431,17 @@ body.dark .nav-logo-dark { display: block; }
     z-index: 1;                 /* Above the background image */
     text-align: center;
     padding: 48px 60px;
-    background: rgba(243,233,220,0.82);  /* Light cream, 82% opacity */
+    background: rgba(243,233,220,0.88);  /* Light cream, 88% opacity */
     border: 1px solid var(--border);
 }
 
 /* Dark mode hero card — darker, more opaque */
-body.dark .hero-content { background: rgba(26,17,16,0.88); }
+body.dark .hero-content { background: rgba(26,17,16,0.92); }
 
-/* Hero heading — large Cinzel with wide letter spacing */
+/* Hero heading — large with wide letter spacing */
 .hero-content h1 {
-    font-family: 'Cinzel', serif;
     font-size: clamp(2rem, 5vw, 3.6rem);
     font-weight: 700;
-    color: var(--heading);
     letter-spacing: 4px;
     margin-bottom: 16px;
 }
@@ -464,7 +480,7 @@ body.dark .hero-content { background: rgba(26,17,16,0.88); }
 }
 
 /* Solid button hover — darker gold with warm glow */
-.btn-dark:hover { background: var(--btn-hover); border-color: var(--btn-hover); box-shadow: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3); }
+.btn-dark:hover { background: var(--btn-hover); border-color: var(--btn-hover); box-shadow: var(--glow-gold); }
 
 /* Outline button — transparent with gold border and text */
 .btn-outline {
@@ -474,7 +490,7 @@ body.dark .hero-content { background: rgba(26,17,16,0.88); }
 }
 
 /* Outline button hover — fills with gold, text goes dark */
-.btn-outline:hover { background: var(--accent); color: var(--btn-text); box-shadow: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3); }
+.btn-outline:hover { background: var(--accent); color: var(--btn-text); box-shadow: var(--glow-gold); }
 
 
 /* CONTENT SECTIONS
@@ -493,11 +509,9 @@ section { padding: 80px 40px; background: var(--bg); }
     margin-bottom: 12px;
 }
 
-/* Section title — responsive sizing with Cinzel */
+/* Section title — responsive sizing */
 .section-title {
-    font-family: 'Cinzel', serif;
     font-size: clamp(1.4rem, 3vw, 2.2rem);
-    color: var(--heading);
     margin-bottom: 16px;
 }
 
@@ -541,8 +555,10 @@ body.dark .ad-banner {
    via ::after pseudo-element for consistent lighting. */
 
 .img-ph {
-    background: var(--ph);
-    background-size: 100% 100%;
+    background-color: var(--ph);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     position: relative;
     overflow: hidden;
     width: 100%;
@@ -627,7 +643,7 @@ body.dark .ad-banner {
 
 /* Product description and price */
 .product-desc { font-size: 1rem; color: var(--text2); margin-bottom: 14px; }
-.product-price { font-size: 1.15rem; color: var(--text); font-weight: 700; margin-bottom: 16px; margin-top: auto; }
+.product-price { font-size: 1.15rem; color: var(--text); font-weight: 700; margin-bottom: 16px; }
 
 
 /* FILTER BAR (Shop Page)
@@ -660,7 +676,7 @@ body.dark .ad-banner {
 
 /* Active/hover filter — gold fill with warm glow */
 .filter-btn:hover,
-.filter-btn.active { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); box-shadow: 0 0 8px rgba(197,160,89,0.5), 0 0 16px rgba(197,160,89,0.3); }
+.filter-btn.active { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); box-shadow: var(--glow-gold-sm); }
 
 
 /* PAGINATION (Shop Page)
@@ -688,7 +704,7 @@ body.dark .ad-banner {
 
 /* Active/hover page — gold fill with glow */
 .pagination span.active,
-.pagination span:hover { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); box-shadow: 0 0 8px rgba(197,160,89,0.5), 0 0 16px rgba(197,160,89,0.3); }
+.pagination span:hover { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); box-shadow: var(--glow-gold-sm); }
 
 
 /* NEWSLETTER SECTION
@@ -746,16 +762,14 @@ body.dark .ad-banner {
 }
 
 /* Button hover — darker gold with glow */
-.newsletter-form button:hover { background: var(--btn-hover); box-shadow: 0 0 10px rgba(197,160,89,0.6), 0 0 20px rgba(197,160,89,0.3); }
+.newsletter-form button:hover { background: var(--btn-hover); box-shadow: var(--glow-gold); }
 
 
 /* TWO-COLUMN LAYOUT (Zigzag Sections)
    Used on Home and About pages for alternating image/text rows. */
 
 .two-col-text h2 {
-    font-family: 'Cinzel', serif;
     font-size: 2rem;
-    color: var(--heading);
     margin-bottom: 16px;
 }
 
@@ -776,11 +790,25 @@ body.dark .ad-banner {
 /* Flame icon above each value */
 .value-icon { font-size: 2rem; color: var(--accent); margin-bottom: 16px; }
 
+/* SC logo icon in value cards */
+.value-icon-img {
+    height: 36px;
+    width: auto;
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+/* Light mode — dark logo, hide light */
+.value-icon-light { display: none !important; }
+.value-icon-dark  { display: inline-block !important; }
+
+/* Dark mode — light logo, hide dark */
+body.dark .value-icon-light { display: inline-block !important; }
+body.dark .value-icon-dark  { display: none !important; }
+
 .value-card h3 {
-    font-family: 'Cinzel', serif;
     font-size: 1.15rem;
     letter-spacing: 2px;
-    color: var(--heading);
     margin-bottom: 10px;
 }
 
@@ -815,13 +843,10 @@ body.dark .ad-banner {
 .team-role { font-size: 0.92rem; color: var(--text2); }
 
 
-/* CONTACT PAGE
-   Form fields, contact info, and social links. */
-
-.contact-form h2 {
-    font-family: 'Cinzel', serif;
+/* Contact page headings — shared style */
+.contact-form h2,
+.contact-info h2 {
     font-size: 1.4rem;
-    color: var(--heading);
     margin-bottom: 28px;
 }
 
@@ -862,19 +887,10 @@ body.dark .ad-banner {
 /* Textarea — fixed height, no resize */
 .form-field textarea { height: 130px; resize: none; }
 
-/* Contact info heading */
-.contact-info h2 {
-    font-family: 'Cinzel', serif;
-    font-size: 1.4rem;
-    color: var(--heading);
-    margin-bottom: 28px;
-}
-
 /* Individual info items (email, phone, hours) */
 .info-item { margin-bottom: 24px; }
 
 .info-item h4 {
-    font-family: 'Cinzel', serif;
     font-size: 0.8rem;
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -942,7 +958,7 @@ footer {
 }
 
 /* Footer brand hover — fiery orange-red glow */
-.footer-brand:hover { text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+.footer-brand:hover { text-shadow: var(--glow-fire); }
 
 /* Footer logo image hover — matching orange-red drop shadow */
 .footer-brand:hover .footer-logo {
@@ -984,7 +1000,7 @@ footer {
 }
 
 /* Social icon hover — fiery orange-red with glow */
-.footer-social a:hover { border-color: #e8652e; color: #e8652e; text-shadow: 0 0 8px rgba(232,101,46,0.7); box-shadow: 0 0 8px rgba(232,101,46,0.5); }
+.footer-social a:hover { border-color: var(--fire); color: var(--fire); text-shadow: var(--glow-fire); box-shadow: 0 0 8px rgba(232,101,46,0.5); }
 
 /* Contact page social icons — use body theme colors instead of footer colors */
 .contact-info .footer-social a {
@@ -1023,7 +1039,7 @@ footer {
 }
 
 /* Footer link hover — fiery orange-red with glow and slight indent */
-.footer-col ul li a:hover { color: #e8652e; padding-left: 4px; text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+.footer-col ul li a:hover { color: var(--fire); padding-left: 4px; text-shadow: var(--glow-fire); }
 
 /* Footer Bottom
    Copyright line with gold top border */
@@ -1047,7 +1063,7 @@ footer {
     font-size: 0.88rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--footer-muted);     /* Gold text */
+    color: var(--text);             /* Matches body text — brown in light, gold in dark */
     margin-top: 12px;
     margin-bottom: 12px;
     display: flex;
@@ -1058,35 +1074,43 @@ footer {
     transition: color 0.2s;
 }
 
-/* Flame icons on left and right side of text
-   Uses CSS mask-image with an inline SVG flame shape.
-   The icon color inherits from currentColor via background-color. */
+/* SC logo icons — now inline <img> tags, pseudo-elements disabled */
 .stogie-lit::before,
 .stogie-lit::after {
-    content: '';
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    flex-shrink: 0;
-    background-color: currentColor;
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2C12 2 7 7 7 13a5 5 0 0 0 10 0c0-2.5-1.5-5-2.5-6 0 1.5-1 2.5-2 2.5S11 8.5 12 2z'/%3E%3C/svg%3E");
-    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 2C12 2 7 7 7 13a5 5 0 0 0 10 0c0-2.5-1.5-5-2.5-6 0 1.5-1 2.5-2 2.5S11 8.5 12 2z'/%3E%3C/svg%3E");
-    -webkit-mask-size: contain;
-    mask-size: contain;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    -webkit-mask-position: center;
-    mask-position: center;
+    content: none;
 }
 
-/* Hover — fiery orange-red with flame glow (all pages) */
-.stogie-lit:hover { color: #e8652e; text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+.stogie-lit .sc-icon {
+    height: 18px;
+    width: auto;
+    display: inline-block;
+    flex-shrink: 0;
+    transition: filter 0.2s;
+}
 
-/* Footer-specific stogie-lit — left-aligned instead of centered */
+/* Light mode — show dark icon, hide light */
+.stogie-lit .sc-icon-light { display: none; }
+.stogie-lit .sc-icon-dark  { display: inline-block; }
+
+/* Dark mode — show light icon, hide dark */
+body.dark .stogie-lit .sc-icon-light { display: inline-block; }
+body.dark .stogie-lit .sc-icon-dark  { display: none; }
+
+/* Footer always dark bg — always light icon */
+footer .stogie-lit .sc-icon-light { display: inline-block; }
+footer .stogie-lit .sc-icon-dark  { display: none; }
+
+/* Hover glow on icons to match text */
+.stogie-lit:hover .sc-icon {
+    filter: drop-shadow(0 0 6px rgba(232,101,46,0.7)) drop-shadow(0 0 12px rgba(232,101,46,0.4));
+}
+
+/* Hover — fiery orange-red with flame glow (body only, not footer) */
+.stogie-lit:hover { color: var(--fire); text-shadow: var(--glow-fire); }
+
+/* Footer-specific stogie-lit — gold, left-aligned under logo */
 footer .stogie-lit { color: var(--footer-muted); justify-content: flex-start; }
-
-/* Footer stogie-lit hover — same fiery orange-red */
-footer .stogie-lit:hover { color: #e8652e; text-shadow: 0 0 8px rgba(232,101,46,0.7), 0 0 16px rgba(232,101,46,0.4); }
+footer .stogie-lit:hover { color: var(--fire); text-shadow: var(--glow-fire); }
 
 
 /* RESPONSIVE — MOBILE NEWSLETTER
@@ -1096,4 +1120,262 @@ footer .stogie-lit:hover { color: #e8652e; text-shadow: 0 0 8px rgba(232,101,46,
     .newsletter-form { flex-direction: column; }
     .newsletter-form input { border-right: 1px solid var(--border); border-radius: 2px; border-bottom: none; }
     .newsletter-form button { border-radius: 2px; }
+}
+
+
+/* QUANTITY SELECTOR
+   - / + buttons with quantity display, max 3. */
+
+.qty-selector {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 14px;
+    width: fit-content;
+}
+
+.qty-btn {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.qty-btn:hover { background: var(--btn-bg); color: var(--btn-text); box-shadow: var(--glow-gold-sm); }
+
+.qty-minus { border-radius: 2px 0 0 2px; }
+.qty-plus  { border-radius: 0 2px 2px 0; }
+
+.qty-value {
+    width: 40px;
+    height: 34px;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--input-bg);
+}
+
+/* PRODUCT MODAL
+   Full-screen overlay with product details popup. */
+
+.product-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-modal.active { display: flex; }
+
+.product-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26,17,16,0.7);
+    backdrop-filter: blur(4px);
+}
+
+.product-modal-content {
+    position: relative;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    max-width: 860px;
+    width: 92%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--glow-gold);
+}
+
+.product-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text);
+    cursor: pointer;
+    z-index: 10;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.product-modal-close:hover { color: var(--fire); }
+
+.product-modal-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.product-modal-img {
+    border-right: 1px solid var(--border);
+}
+
+.product-modal-img .img-ph { height: 100%; min-height: 320px; }
+
+.product-modal-details {
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-modal-details h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+}
+
+.modal-desc {
+    font-size: 1.05rem;
+    color: var(--text2);
+    margin-bottom: 24px;
+    line-height: 1.7;
+}
+
+.modal-specs {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+}
+
+.modal-spec {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: var(--text2);
+}
+
+.modal-spec-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+}
+
+@media (max-width: 767px) {
+    .product-modal-body { grid-template-columns: 1fr; }
+    .product-modal-img { border-right: none; border-bottom: 1px solid var(--border); }
+    .product-modal-img .img-ph { min-height: 240px; }
+    .product-modal-details { padding: 24px 20px; }
+}
+
+
+/* CART DRAWER — Slide-in side panel */
+
+.cart-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,17,16,0.5);
+    z-index: 2500;
+}
+.cart-overlay.active { display: block; }
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 380px;
+    max-width: 90vw;
+    height: 100vh;
+    background: var(--card-bg);
+    border-left: 1px solid var(--border);
+    z-index: 2600;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+}
+.cart-drawer.active { right: 0; }
+
+.cart-drawer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+}
+.cart-drawer-header h3 { font-size: 1.1rem; letter-spacing: 2px; margin: 0; }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 16px 24px; }
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+}
+.cart-item-info { flex: 1; }
+.cart-item-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--heading);
+    letter-spacing: 1px;
+}
+.cart-item-qty { font-size: 0.85rem; color: var(--text2); margin-top: 2px; }
+.cart-item-price { font-weight: 700; color: var(--text); margin-left: 16px; white-space: nowrap; }
+.cart-item-remove {
+    background: none; border: none; color: var(--text2);
+    cursor: pointer; font-size: 1.1rem; margin-left: 12px;
+    padding: 0 4px; transition: color 0.2s;
+}
+.cart-item-remove:hover { color: var(--fire); }
+
+.cart-empty { text-align: center; color: var(--text2); padding: 40px 0; }
+
+.cart-footer { padding: 20px 24px; border-top: 1px solid var(--border); }
+.cart-total {
+    display: flex; justify-content: space-between;
+    font-family: 'Cinzel', serif; font-size: 1rem;
+    letter-spacing: 2px; margin-bottom: 16px; color: var(--heading);
+}
+
+.cart-fab {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--btn-bg); color: var(--btn-text);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: var(--glow-gold); z-index: 2000;
+    transition: background 0.2s;
+}
+.cart-fab:hover { background: var(--btn-hover); }
+
+.cart-count {
+    position: absolute; top: -4px; right: -4px;
+    background: var(--fire); color: #fff;
+    font-family: 'Cinzel', serif; font-size: 0.7rem;
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+}
+
+
+/* RESPONSIVE — MOBILE FOOTER
+   Center logo, tagline, stogie-lit, follow us, and social icons on small screens. */
+@media (max-width: 767px) {
+    footer .col-12.col-md-5 { text-align: center; }
+    footer .footer-brand { display: flex; justify-content: center; }
+    footer .footer-logo { margin-left: auto; margin-right: auto; }
+    footer .footer-tagline { text-align: center; }
+    footer .stogie-lit { justify-content: center; }
+    footer .footer-follow { text-align: center; }
+    footer .footer-social { justify-content: center; }
 }
