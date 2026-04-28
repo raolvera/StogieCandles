@@ -20,6 +20,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const ALLOWED_ORIGINS = [
     'https://stogiecandles.com',
     'https://www.stogiecandles.com',
+    'https://raolvera.github.io',
     'http://127.0.0.1:5500',       // local dev (Live Server)
     'http://localhost:5500'
 ];
