@@ -1,30 +1,30 @@
 /*
  * forms.js
- * Stogie Candles — Form handling + Stripe checkout
+ * Stogie Candles
  *
- * Wires up newsletter subscriptions and the contact form to
- * Formspree endpoints. Also handles the legacy Stripe Checkout
- * redirect for any buttons still using data-price-id attributes.
+ * Handles newsletter subscriptions and the contact form.
+ * All forms submit to Formspree endpoints via fetch.
+ * Also includes a legacy Stripe Checkout handler for any
+ * buttons that still use data-price-id attributes.
  *
- * Setup:
- *   1. Create forms at https://formspree.io — one for contact,
- *      one for the newsletter — and drop the IDs below.
+ * To set up:
+ *   1. Create forms at formspree.io and paste the IDs below
  *   2. Grab your Stripe publishable key from the dashboard
- *      and paste it into STRIPE_PUBLISHABLE_KEY.
- *   3. For product buttons using Payment Links (buy.stripe.com)
- *      no key is needed — those redirect directly.
  */
 
+/* Formspree endpoints */
 const FORMSPREE_CONTACT    = 'https://formspree.io/f/xeelgeaz';
 const FORMSPREE_NEWSLETTER = 'https://formspree.io/f/xeelgeaz';
+
+/* Stripe publishable key (test mode) */
 const STRIPE_PUBLISHABLE_KEY =
     'pk_test_51SAiHNPx23ZBg5Mh7ktknbUJtd7x5TTRC4pyTZeqa5eLQn33BeEzaCaVMEblC5JLCx5NfTztp6Wgh1ihed4QYRSu002eKPTOvM';
 
 
-// Newsletter Forms
-// Every page has at least one .newsletter-form. On submit we POST
-// the email to Formspree and show inline feedback on the button.
-
+/* Newsletter forms
+   Every page has at least one .newsletter-form. On submit we
+   POST the email to Formspree and show feedback on the button
+   so the user knows it went through. */
 document.querySelectorAll('.newsletter-form').forEach(form => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -46,7 +46,7 @@ document.querySelectorAll('.newsletter-form').forEach(form => {
             });
 
             if (res.ok) {
-                btn.textContent = 'Subscribed ✓';
+                btn.textContent  = 'Subscribed ✓';
                 emailInput.value = '';
             } else {
                 btn.textContent = 'Error — Try Again';
@@ -55,13 +55,15 @@ document.querySelectorAll('.newsletter-form').forEach(form => {
             btn.textContent = 'Error — Try Again';
         }
 
+        // reset the button after a few seconds
         setTimeout(() => { btn.textContent = originalText; btn.disabled = false; }, 3000);
     });
 });
 
 
-// Contact Form 
-
+/* Contact form
+   Collects name, email, phone, subject, and message.
+   Same pattern as newsletter — POST to Formspree, show feedback. */
 const contactForm = document.querySelector('.contact-form form');
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
@@ -97,10 +99,9 @@ if (contactForm) {
 }
 
 
-// Stripe Checkout (legacy)
-// Kept for any future buttons that use data-price-id instead of
-// direct Payment Links. Lazy-loads Stripe.js on first click.
-
+/* Stripe Checkout (legacy)
+   Kept around for any future buttons using data-price-id instead
+   of the cart system. Lazy-loads Stripe on first click. */
 let stripe = null;
 
 document.querySelectorAll('.btn-stripe-checkout').forEach(btn => {

@@ -1,46 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta & SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stogie Candles | Premium Scented Candles</title>
 
-    <!-- Favicon — SC logo -->
     <link rel="icon" type="image/png" href="img/SClight.png">
 
-    <!-- Fonts & Stylesheets -->
-    <!-- Google Fonts: Cinzel (headings/nav) + Lora (body text) -->
+    <!-- Fonts: Cinzel + Lora -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <!-- Bootstrap 5 — grid system, responsive utilities, navbar component -->
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles — theme variables, components, light/dark mode -->
+    <!-- Custom styles -->
     <link rel="stylesheet" href="style.css">
     <script>var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-preload');</script>
 </head>
 <body>
 
-<!-- NAVIGATION — Sticky top navbar with logo, links, theme toggle,
-     and responsive hamburger menu. Shared across all pages.
-     Light/dark logo variants swap via CSS based on body.dark class. -->
+<!-- Navbar — shared across all pages, light/dark logo swap via CSS -->
 <nav class="navbar navbar-expand-lg sticky-top" id="main-nav">
     <div class="container-fluid px-4">
-        <!-- Brand logos: SC icon + full logo, light and dark variants -->
+        <!-- Brand logos -->
         <a href="index.html" class="nav-brand navbar-brand"><img src="img/SCdark.png" alt="SC" class="nav-logo nav-logo-light nav-sc"><img src="img/SClight.png" alt="SC" class="nav-logo nav-logo-dark nav-sc"><img src="img/LogoDark.png" alt="Stogie Candles" class="nav-logo nav-logo-light"><img src="img/LogoLight.png" alt="Stogie Candles" class="nav-logo nav-logo-dark"></a>
-        <!-- Mobile hamburger toggle (visible below 992px) -->
+        <!-- Mobile toggle -->
         <div class="d-flex align-items-center gap-3 d-lg-none ms-auto">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <!-- Collapsible nav menu — dropdown on mobile, inline on desktop -->
+        <!-- Nav links -->
         <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
                 <li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
                 <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
                 <li class="nav-item"><a href="shop.html" class="btn-nav">Shop Now</a></li>
-                <!-- Mobile theme toggle (sun/moon icons, visible below 992px) -->
+                <!-- Mobile theme toggle -->
                 <li class="nav-item d-lg-none mt-2">
                     <button id="theme-toggle" aria-label="Toggle theme" class="d-flex align-items-center gap-2 nav-link px-0">
                         <svg id="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -48,7 +43,7 @@
                     </button>
                 </li>
             </ul>
-            <!-- Desktop theme toggle (visible at 992px and above) -->
+            <!-- Desktop theme toggle -->
             <button id="theme-toggle-lg" aria-label="Toggle theme" class="d-none d-lg-flex ms-4">
                 <svg id="icon-sun-lg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
                 <svg id="icon-moon-lg" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -57,8 +52,7 @@
     </div>
 </nav>
 
-<!-- HERO SECTION — Full-viewport hero with background image,
-     dark overlay, centered content card, tagline, and Shop Now CTA. -->
+<!-- Hero section with background image, tagline, and shop CTA -->
 <section class="hero">
     <div class="hero-img-placeholder"></div>
     <div class="hero-content">
@@ -71,13 +65,12 @@
     </div>
 </section>
 
-<!-- Promotional Banner — Limited time offer strip -->
+<!-- Promo banner -->
 <div class="ad-banner">
      Limited Time Offer &nbsp;·&nbsp; Buy 2 Get 1 Free &nbsp;·&nbsp; Use Code: <strong>STOGIE3</strong>
 </div>
 
-<!-- FEATURED COLLECTION — Three-column image grid showcasing
-     coffee, bourbon, and cedar scent categories with CTA. -->
+<!-- Featured collection — coffee, bourbon, cedar image grid -->
 <section class="section-center">
     <p class="section-label">The Collection</p>
     <h2 class="section-title">Beyond the Cigar Lounge</h2>
@@ -93,8 +86,7 @@
     <a href="shop.html" class="btn btn-outline">View All Products</a>
 </section>
 
-<!-- SIGNATURE SCENTS TEASER — Two-column zigzag layout with
-     cigar smoker image and description of the candle naming theme. -->
+<!-- Signature scents teaser — zigzag layout with candle naming theme -->
 <section style="background:var(--bg3); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
     <div class="container-xl">
         <div class="row align-items-center g-5">
@@ -112,13 +104,12 @@
     </div>
 </section>
 
-<!-- Bundle Promotional Banner — Mix & match deal strip -->
+<!-- Bundle promo banner -->
 <div class="ad-banner">
      Bundle &amp; Save &nbsp;·&nbsp; Mix Any 3 Candles for $70 &nbsp;·&nbsp; Save $15
 </div>
 
-<!-- ABOUT TEASER — Two-column zigzag layout with lounge image
-     and brand origin story. Links to the full About page. -->
+<!-- About teaser — brand origin story with link to full page -->
 <section>
     <div class="container-xl">
         <div class="row align-items-center g-5">
@@ -136,8 +127,7 @@
     </div>
 </section>
 
-<!-- NEWSLETTER — Email signup form for special offers and
-     early access to limited releases. -->
+<!-- Newsletter signup -->
 <div class="newsletter">
     <h2 class="section-title">Get Exclusive Deals</h2>
     <p>Subscribe for special offers, new arrivals, and early access to limited releases.</p>
@@ -147,9 +137,7 @@
     </form>
 </div>
 
-<!-- FOOTER — Dark background with logo, tagline, social links,
-     navigation columns (Shop, Company, Help), and copyright.
-     Shared across all pages. Logo recolored via theme.js canvas. -->
+<!-- Footer — shared across all pages -->
 <footer>
     <div class="container-xl">
         <div class="row g-4 mb-5">
@@ -198,11 +186,8 @@
 </footer>
 
 <!-- Scripts -->
-<!-- Bootstrap JS — navbar collapse, dropdowns -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Theme toggle — light/dark mode switching + footer logo recolor -->
 <script src="theme.js"></script>
-<!-- Form handler — prevents default submit (placeholder until backend) -->
 <script src="forms.js"></script>
 </body>
 </html>

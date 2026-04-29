@@ -1,24 +1,23 @@
 /*
  * shop.js
- * Stogie Candles — Product filtering, pagination, modal & cart
+ * Stogie Candles
  *
- * Drives the shop page: collection/category filter bar,
- * paginated product grid, detail modal popup, quantity selector,
- * cart drawer, and Stripe Checkout via serverless function.
+ * Powers the shop page: product filtering by collection and
+ * category, pagination, product detail modal, quantity selectors,
+ * the slide-in cart drawer, and Stripe Checkout through an
+ * AWS Lambda serverless function.
  */
 
 
-// ── Config ─────────────────────────────────────────────────────
-// Point this to your Vercel deployment once it's live.
-// During local dev you can test with the Payment Links fallback.
-
-// Point this to your AWS API Gateway endpoint once deployed.
-// Example: 'https://abc123.execute-api.us-east-1.amazonaws.com/checkout'
+/* AWS API Gateway endpoint for the checkout Lambda function.
+   The front end POSTs the cart here and gets back a Stripe
+   Checkout URL to redirect the customer to. */
 const CHECKOUT_API = 'https://s0xlp4wxxi.execute-api.us-east-1.amazonaws.com/checkout';
 
 
-// ── Filter Map ─────────────────────────────────────────────────
-
+/* Maps the visible filter button text to the data attribute
+   values on each product card. Cards use data-line for
+   collections and data-category for tags like bestseller. */
 const filterMap = {
     'All':              'all',
     'The Family':       'family',
@@ -31,12 +30,15 @@ const filterMap = {
     'Gift Sets':        'gift'
 };
 
+/* Track which filter is active and which page we're on */
 let activeFilter = 'all';
 let currentPage  = 1;
 
 
-// ── Render ─────────────────────────────────────────────────────
-
+/* Shows or hides product cards based on the active filter.
+   "All" view respects pagination. Collection and category
+   filters show every matching card regardless of page. Also
+   updates the section label and highlights the active page. */
 function render() {
     const lineFilters = ['family', 'lounge', 'cedar', 'roast', 'reserve'];
     const catFilters  = ['bestseller', 'new', 'gift'];
@@ -54,23 +56,26 @@ function render() {
         item.style.display = show ? '' : 'none';
     });
 
+    // pagination only shows in the "All" view
     document.querySelector('.pagination').style.visibility =
         activeFilter === 'all' ? '' : 'hidden';
 
+    // swap the section label to match the active filter
     const labels = ['all','family','lounge','cedar','roast','reserve','bestseller','new','gift'];
     labels.forEach(l => {
         document.getElementById(`label-${l}`).style.display =
             activeFilter === l ? '' : 'none';
     });
 
+    // highlight the current page number
     document.querySelectorAll('.page-btn').forEach(b => {
         b.classList.toggle('active', parseInt(b.dataset.page) === currentPage);
     });
 }
 
 
-// ── Filter Buttons ─────────────────────────────────────────────
-
+/* Filter buttons — clicking one updates the active filter,
+   resets to page 1, and re-renders the grid. */
 document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
@@ -82,8 +87,8 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 });
 
 
-// ── Pagination ─────────────────────────────────────────────────
-
+/* Pagination — page numbers and prev/next arrows.
+   Scrolls back to the top of the grid after changing pages. */
 document.querySelectorAll('.page-btn').forEach(b => {
     b.addEventListener('click', () => {
         currentPage = parseInt(b.dataset.page);
@@ -102,15 +107,23 @@ document.getElementById('next-btn').addEventListener('click', () => {
     window.scrollTo({ top: document.getElementById('main-nav').offsetHeight, behavior: 'smooth' });
 });
 
+/* First paint — show all products, page 1 */
 render();
 
 
-// ── Product Detail Modal ───────────────────────────────────────
+/*
+ * Product Detail Modal
+ *
+ * Clicking a product image or name opens a popup with the full
+ * details. Everything is pulled from data attributes on the card
+ * so we don't need a separate data source.
+ */
 
 const modal        = document.getElementById('product-modal');
 const modalOverlay = modal.querySelector('.product-modal-overlay');
 const modalClose   = modal.querySelector('.product-modal-close');
 
+/* Friendly names for each product line */
 const lineNames = {
     family:  'The Family Collection',
     lounge:  'The Lounge Collection',
@@ -119,7 +132,8 @@ const lineNames = {
     reserve: 'The Aged Reserve'
 };
 
-// store reference to the card that opened the modal
+/* Keep a reference to the card that opened the modal so the
+   modal's Add to Cart button knows which product to add. */
 let activeModalCard = null;
 
 function openModal(card) {
@@ -127,6 +141,7 @@ function openModal(card) {
     const item = card.closest('.product-item');
     const line = item.dataset.line || '';
 
+    // populate the modal fields from the card's data
     document.getElementById('modal-line').textContent  = lineNames[line] || 'Stogie Candles';
     document.getElementById('modal-name').textContent  = card.querySelector('.product-name').textContent;
     document.getElementById('modal-desc').textContent  = card.querySelector('.product-desc').textContent;
@@ -137,7 +152,7 @@ function openModal(card) {
     document.getElementById('modal-size').textContent  = card.dataset.size  || '—';
     document.getElementById('modal-wick').textContent  = card.dataset.wick  || '—';
 
-    // reset quantity
+    // reset the modal quantity picker to 1
     const qtyEl = document.querySelector('#modal-qty-selector .qty-value');
     if (qtyEl) qtyEl.textContent = '1';
 
@@ -151,6 +166,7 @@ function closeModal() {
     activeModalCard = null;
 }
 
+/* Make the product image and name clickable to open the modal */
 document.querySelectorAll('.product-card').forEach(card => {
     [card.querySelector('.img-ph'), card.querySelector('.product-name')]
         .filter(Boolean)
@@ -160,6 +176,7 @@ document.querySelectorAll('.product-card').forEach(card => {
         });
 });
 
+/* Close the modal on overlay click, X button, or Escape key */
 modalOverlay.addEventListener('click', closeModal);
 modalClose.addEventListener('click', closeModal);
 document.addEventListener('keydown', e => {
@@ -167,8 +184,8 @@ document.addEventListener('keydown', e => {
 });
 
 
-// ── Quantity Selector ──────────────────────────────────────────
-
+/* Quantity selector — the +/- buttons on product cards and
+   the modal. Clamped between 1 and 3 (small batch limit). */
 document.addEventListener('click', e => {
     const btn = e.target.closest('.qty-btn');
     if (!btn) return;
@@ -183,10 +200,15 @@ document.addEventListener('click', e => {
 });
 
 
-// ── Cart State ─────────────────────────────────────────────────
-// Cart is an array of { priceId, name, price, quantity }
-// Stored in sessionStorage so it survives page refreshes but
-// clears when the browser tab closes.
+/*
+ * Cart
+ *
+ * The cart is an array of objects: { priceId, name, price, quantity }
+ * Stored in sessionStorage so it survives page refreshes but
+ * clears when the browser tab closes. The cart drawer slides in
+ * from the right and shows all items with quantity controls,
+ * a running total, and checkout/clear buttons.
+ */
 
 let cart = JSON.parse(sessionStorage.getItem('sc-cart') || '[]');
 
@@ -202,9 +224,7 @@ function getCartTotal() {
     return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 }
 
-
-// ── Cart UI ────────────────────────────────────────────────────
-
+/* Cart drawer elements */
 const cartDrawer  = document.getElementById('cart-drawer');
 const cartOverlay = document.getElementById('cart-overlay');
 const cartItemsEl = document.getElementById('cart-items');
@@ -224,6 +244,8 @@ function closeCart() {
     document.body.style.overflow = '';
 }
 
+/* Builds the cart drawer HTML from the cart array.
+   Each item gets +/- quantity buttons and a remove button. */
 function renderCart() {
     const count = getCartCount();
     cartCountEl.textContent = count;
@@ -253,13 +275,15 @@ function renderCart() {
     cartTotalEl.textContent = '$' + getCartTotal().toFixed(2);
 }
 
-// continue shopping — close the drawer
+/* Cart open/close listeners */
 document.getElementById('cart-continue-btn').addEventListener('click', closeCart);
 document.getElementById('cart-close').addEventListener('click', closeCart);
 cartFab.addEventListener('click', openCart);
 cartOverlay.addEventListener('click', closeCart);
 
-// remove item or adjust quantity in cart
+/* Handle clicks inside the cart items area.
+   Covers the remove button and the per-item +/- buttons.
+   Minus below 1 removes the item entirely. */
 cartItemsEl.addEventListener('click', e => {
     const removeBtn = e.target.closest('.cart-item-remove');
     if (removeBtn) {
@@ -279,6 +303,7 @@ cartItemsEl.addEventListener('click', e => {
         } else if (action === 'minus' && cart[idx].quantity > 1) {
             cart[idx].quantity--;
         } else if (action === 'minus' && cart[idx].quantity === 1) {
+            // going below 1 removes the item
             cart.splice(idx, 1);
         }
 
@@ -287,27 +312,27 @@ cartItemsEl.addEventListener('click', e => {
     }
 });
 
-// clear entire cart
+/* Clear the entire cart */
 document.getElementById('cart-clear-btn').addEventListener('click', () => {
     cart = [];
     saveCart();
     renderCart();
 });
 
-// initial render
+/* Show the cart on first load (in case there are items from a previous refresh) */
 renderCart();
 
 
-// ── Add to Cart ────────────────────────────────────────────────
-
+/* Adds a product to the cart. If the item is already there,
+   it updates the quantity instead of adding a duplicate.
+   Max 3 per item (small batch limit). */
 function addToCart(card, qtySelector) {
-    const priceId = card.dataset.priceId;
-    const name    = card.querySelector('.product-name').textContent;
+    const priceId  = card.dataset.priceId;
+    const name     = card.querySelector('.product-name').textContent;
     const priceStr = card.querySelector('.product-price').textContent;
-    const price   = parseFloat(priceStr.replace('$', ''));
-    const qty     = qtySelector ? parseInt(qtySelector.querySelector('.qty-value').textContent) : 1;
+    const price    = parseFloat(priceStr.replace('$', ''));
+    const qty      = qtySelector ? parseInt(qtySelector.querySelector('.qty-value').textContent) : 1;
 
-    // if item already in cart, update quantity (max 3 per item)
     const existing = cart.find(item => item.priceId === priceId);
     if (existing) {
         existing.quantity = Math.min(existing.quantity + qty, 3);
@@ -318,7 +343,7 @@ function addToCart(card, qtySelector) {
     saveCart();
     renderCart();
 
-    // brief feedback on the button
+    // quick feedback on the button, then reset
     const btn = card.querySelector('.btn-add-cart') ||
                 document.getElementById('modal-cart-btn');
     if (btn) {
@@ -326,16 +351,15 @@ function addToCart(card, qtySelector) {
         setTimeout(() => { btn.textContent = 'Add to Cart'; }, 1500);
     }
 
-    // open the cart drawer
     openCart();
 }
 
-// card buttons
+/* Listen for Add to Cart clicks on both product cards and the modal */
 document.addEventListener('click', e => {
     const btn = e.target.closest('.btn-add-cart');
     if (!btn) return;
 
-    // if it's the modal button, use the card that opened the modal
+    // modal button uses the card that opened the modal
     if (btn.id === 'modal-cart-btn' && activeModalCard) {
         const qtySel = document.getElementById('modal-qty-selector');
         addToCart(activeModalCard, qtySel);
@@ -343,7 +367,7 @@ document.addEventListener('click', e => {
         return;
     }
 
-    // otherwise it's a card button
+    // regular card button
     const card = btn.closest('.product-card');
     if (!card) return;
     const qtySel = card.querySelector('.qty-selector');
@@ -351,23 +375,27 @@ document.addEventListener('click', e => {
 });
 
 
-// ── Stripe Checkout ────────────────────────────────────────────
-// Posts the cart to the serverless function which creates a
-// Checkout Session and returns the URL to redirect to.
-
+/*
+ * Stripe Checkout
+ *
+ * When the customer clicks "Checkout with Stripe", we POST the
+ * cart to the AWS Lambda function. Lambda creates a Stripe
+ * Checkout Session with all the line items and returns the URL.
+ * We then redirect the browser to Stripe's hosted checkout page.
+ */
 document.getElementById('cart-checkout-btn').addEventListener('click', async () => {
     if (cart.length === 0) return;
 
-    const btn = document.getElementById('cart-checkout-btn');
+    const btn  = document.getElementById('cart-checkout-btn');
     const orig = btn.textContent;
     btn.textContent = 'Redirecting...';
-    btn.disabled = true;
+    btn.disabled    = true;
 
     try {
         const res = await fetch(CHECKOUT_API, {
-            method: 'POST',
+            method:  'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
+            body:    JSON.stringify({
                 items: cart.map(item => ({
                     priceId:  item.priceId,
                     quantity: item.quantity
@@ -378,18 +406,17 @@ document.getElementById('cart-checkout-btn').addEventListener('click', async () 
         const data = await res.json();
 
         if (data.url) {
-            // clear cart before redirect
             cart = [];
             saveCart();
             window.location.href = data.url;
         } else {
             alert(data.error || 'Something went wrong. Please try again.');
             btn.textContent = orig;
-            btn.disabled = false;
+            btn.disabled    = false;
         }
     } catch (err) {
         alert('Could not connect to checkout. Please try again.');
         btn.textContent = orig;
-        btn.disabled = false;
+        btn.disabled    = false;
     }
 });

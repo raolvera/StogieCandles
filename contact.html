@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta & SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stogie Candles | Contact</title>
 
-    <!-- Favicon — SC logo -->
     <link rel="icon" type="image/png" href="img/SClight.png">
 
-    <!-- Fonts & Stylesheets -->
+    <!-- Fonts: Cinzel + Lora -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles -->
     <link rel="stylesheet" href="style.css">
     <script>var t=localStorage.getItem('theme');if(t==='dark')document.documentElement.classList.add('dark-preload');</script>
 </head>
 <body>
 
-<!-- Navigation — Sticky top navbar (shared component) -->
+<!-- Navbar — shared component -->
 <nav class="navbar navbar-expand-lg sticky-top" id="main-nav">
     <div class="container-fluid px-4">
         <!-- Brand logos -->
         <a href="index.html" class="nav-brand navbar-brand"><img src="img/SCdark.png" alt="SC" class="nav-logo nav-logo-light nav-sc"><img src="img/SClight.png" alt="SC" class="nav-logo nav-logo-dark nav-sc"><img src="img/LogoDark.png" alt="Stogie Candles" class="nav-logo nav-logo-light"><img src="img/LogoLight.png" alt="Stogie Candles" class="nav-logo nav-logo-dark"></a>
-        <!-- Mobile hamburger toggle -->
+        <!-- Mobile toggle -->
         <div class="d-flex align-items-center gap-3 d-lg-none ms-auto">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-        <!-- Collapsible nav menu -->
+        <!-- Nav links -->
         <div class="collapse navbar-collapse" id="navMenu">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-4">
                 <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
@@ -52,7 +52,7 @@
     </div>
 </nav>
 
-<!-- PAGE HERO — Shorter hero (40vh) with "Get In Touch" heading. -->
+<!-- Page hero -->
 <section class="hero" style="height:40vh; min-height:280px;">
     <div class="hero-img-placeholder"></div>
     <div class="hero-content">
@@ -61,13 +61,11 @@
     </div>
 </section>
 
-<!-- CONTACT FORM + INFO — Two-column layout with message form
-     (name, email, phone, subject, message) on the left and
-     contact details (email, phone, hours, social) on the right. -->
+<!-- Contact form and info — two-column layout -->
 <section>
     <div class="container-xl">
         <div class="row g-5 justify-content-center align-items-start">
-            <!-- Contact form column -->
+            <!-- Form -->
             <div class="col-12 col-lg-5 contact-form">
                 <h2>Send a Message</h2>
                 <form>
@@ -102,7 +100,7 @@
                     </div>
                 </form>
             </div>
-            <!-- Contact info column -->
+            <!-- Info -->
             <div class="col-12 col-lg-5 contact-info">
                 <h2>Contact Info</h2>
                 <div class="info-item">
@@ -130,12 +128,12 @@
     </div>
 </section>
 
-<!-- Shipping Promotional Banner -->
+<!-- Shipping promo banner -->
 <div class="ad-banner">
      Free Shipping on Orders Over $50 &nbsp;&middot;&nbsp; Limited Time — <a href="shop.html" style="color:inherit; text-decoration:underline;">Shop Now</a>
 </div>
 
-<!-- Newsletter — Email signup for offers -->
+<!-- Newsletter signup -->
 <div class="newsletter">
     <h2 class="section-title">Get Exclusive Deals</h2>
     <p>Subscribe for special offers, new arrivals, and early access to limited releases.</p>
@@ -145,7 +143,7 @@
     </form>
 </div>
 
-<!-- FAQ CTA — Links to the full FAQ page -->
+<!-- FAQ link -->
 <section class="section-center">
     <p class="section-label">Support</p>
     <h2 class="section-title">Frequently Asked Questions</h2>
@@ -155,7 +153,7 @@
     </div>
 </section>
 
-<!-- Footer — Shared site footer -->
+<!-- Footer — shared component -->
 <footer>
     <div class="container-xl">
         <div class="row g-4 mb-5">
